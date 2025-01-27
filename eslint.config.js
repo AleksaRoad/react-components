@@ -1,3 +1,4 @@
+import jsxA11y from "eslint-plugin-jsx-a11y";
 import js from "@eslint/js";
 import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
@@ -10,15 +11,12 @@ import reactCompiler from "eslint-plugin-react-compiler";
 export default tseslint.config(
   { ignores: ["dist"] },
   {
-    extends: [
-      js.configs.recommended,
-      ...tseslint.configs.strict,
-      eslintPluginPrettier,
-    ],
+    extends: [js.configs.recommended, ...tseslint.configs.strict, eslintPluginPrettier],
     files: ["**/*.{ts,tsx}"],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
+      plugin: jsxA11y,
     },
     plugins: {
       react,
@@ -28,10 +26,7 @@ export default tseslint.config(
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      "react-refresh/only-export-components": [
-        "warn",
-        { allowConstantExport: true },
-      ],
+      "react-refresh/only-export-components": ["warn", { allowConstantExport: true }],
       "react-compiler/react-compiler": "error",
       ...react.configs.recommended.rules,
       ...react.configs["jsx-runtime"].rules,
@@ -41,5 +36,5 @@ export default tseslint.config(
         version: "detect",
       },
     },
-  },
+  }
 );
