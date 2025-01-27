@@ -3,12 +3,12 @@ const lowerCamelCaseRegex = /^[_-]{0,1}[a-z]+([A-Z]{1}[a-z0-9]+|\d+)*$/;
 /** @type {import('stylelint').Config} */
 export default {
   extends: [
-    'stylelint-config-standard',
-    'stylelint-config-css-modules',
-    'stylelint-config-clean-order',
+    "stylelint-config-standard",
+    "stylelint-config-css-modules",
+    "stylelint-config-clean-order",
   ],
   rules: {
-    'selector-class-pattern': [
+    "selector-class-pattern": [
       lowerCamelCaseRegex,
       {
         message: (className) =>
@@ -18,9 +18,9 @@ export default {
   },
   overrides: [
     {
-      files: ['*.css', '**/*.css'],
+      files: ["*.css", "**/*.css"],
       rules: {
-        'at-rule-disallowed-list': ['import'],
+        "at-rule-disallowed-list": ["import"],
       },
     },
   ],
