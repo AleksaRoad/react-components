@@ -1,12 +1,14 @@
 import { Component } from "react";
 import styles from "./App.module.css";
-import { RickAndMortyApi } from "../api/rickAndMortyApi";
+import { RickAndMortyApi } from "@/api/rickAndMortyApi";
 import {
   RickAndMortyCharacter,
   RickAndMortyCharacterResponse,
-} from "../api/rickAndMortyApi.types";
+} from "@/api/rickAndMortyApi.types";
 import { AppProps, AppState } from "./app.types";
-import { CharacterItem } from "../item/СharacterItem";
+import { CharacterItem } from "@/item/СharacterItem";
+import { SearchButton } from "@/search/button/SearchButton";
+import { Input } from "@/search/input/input";
 
 export class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
@@ -27,17 +29,20 @@ export class App extends Component<AppProps, AppState> {
   render() {
     const { characters } = this.state;
     return (
-      <>
-        <div className={styles.container}>
-          <div className={styles.itemsContainer}>
-            <ul className={styles.list}>
-              {characters.map((character: RickAndMortyCharacter) => (
-                <CharacterItem key={character.id} character={character} />
-              ))}
-            </ul>
-          </div>
+      <div className={styles.container}>
+        <h1 className={styles.title}>Rick and Morty Characters</h1>
+        <div className={styles.searchContainer}>
+          <Input />
+          <SearchButton />
         </div>
-      </>
+        <div className={styles.itemsContainer}>
+          <ul className={styles.list}>
+            {characters.map((character: RickAndMortyCharacter) => (
+              <CharacterItem key={character.id} character={character} />
+            ))}
+          </ul>
+        </div>
+      </div>
     );
   }
 }
