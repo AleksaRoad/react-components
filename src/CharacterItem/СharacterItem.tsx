@@ -1,6 +1,6 @@
-import { memo } from "react";
-import styles from "./CharacterItem.module.css";
-import type { CharacterItemProps } from "./types.ts";
+import { memo } from 'react';
+import styles from './CharacterItem.module.css';
+import type { CharacterItemProps } from './types.ts';
 
 const CharacterItemComponent = ({ character }: CharacterItemProps) => {
   return (
@@ -20,6 +20,6 @@ const CharacterItemComponent = ({ character }: CharacterItemProps) => {
   );
 };
 
-CharacterItemComponent.displayName = "CharacterItem";
+CharacterItemComponent.displayName = 'CharacterItem';
 
 export const CharacterItem = memo(CharacterItemComponent);

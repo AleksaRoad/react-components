@@ -1,9 +1,9 @@
-import type { RickAndMortyCharacterResponse } from "./types";
+import type { RickAndMortyCharacterResponse } from './types';
 
 export class RickAndMortyApi {
   private endpoints: { [key: string]: string };
 
-  constructor(baseUrl: string = "https://rickandmortyapi.com/api") {
+  constructor(baseUrl: string = 'https://rickandmortyapi.com/api') {
     this.endpoints = {
       characters: `${baseUrl}/character`,
       locations: `${baseUrl}/location`,
@@ -19,14 +19,14 @@ export class RickAndMortyApi {
       }
       return response.json();
     } catch (error) {
-      console.error("Failed to fetch data:", error);
+      console.error('Failed to fetch data:', error);
       throw error;
     }
   }
 
   async fetchCharacters(): Promise<RickAndMortyCharacterResponse> {
     return this.fetchData<RickAndMortyCharacterResponse>(
-      this.endpoints.characters,
+      this.endpoints.characters
     );
   }
 }
