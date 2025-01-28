@@ -1,14 +1,10 @@
 import { Component } from "react";
 import styles from "./App.module.css";
 import { RickAndMortyApi } from "@/api/rickAndMortyApi";
-import {
-  RickAndMortyCharacter,
-  RickAndMortyCharacterResponse,
-} from "@/api/types";
+import { RickAndMortyCharacter, RickAndMortyCharacterResponse } from "@/api/types";
 import { AppProps, AppState } from "./types";
 import { CharacterItem } from "@/CharacterItem/СharacterItem";
-import { SearchButton } from "@/Search/SearchButton/SearchButton";
-import { Input } from "@/Search/Input/Input";
+import { SearchForm } from "@/SearchForm/SearchForm";
 
 export class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {
@@ -32,8 +28,7 @@ export class App extends Component<AppProps, AppState> {
       <div className={styles.container}>
         <h1 className={styles.title}>Rick and Morty Characters</h1>
         <div className={styles.searchContainer}>
-          <Input />
-          <SearchButton />
+          <SearchForm />
         </div>
         <div className={styles.itemsContainer}>
           <ul className={styles.list}>
