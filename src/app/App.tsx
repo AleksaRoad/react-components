@@ -1,14 +1,11 @@
 import { Component } from "react";
 import styles from "./App.module.css";
 import { RickAndMortyApi } from "@/api/rickAndMortyApi";
-import {
-  RickAndMortyCharacter,
-  RickAndMortyCharacterResponse,
-} from "@/api/rickAndMortyApi.types";
-import { AppProps, AppState } from "./app.types";
-import { CharacterItem } from "@/item/СharacterItem";
-import { SearchButton } from "@/search/button/SearchButton";
-import { Input } from "@/search/input/input";
+import { RickAndMortyCharacter, RickAndMortyCharacterResponse } from "@/api/types";
+import { AppProps, AppState } from "./types";
+import { CharacterItem } from "@/CharacterItem/СharacterItem";
+import { SearchButton } from "@/Search/SearchButton/SearchButton";
+import { Input } from "@/Search/Input/Input";
 
 export class App extends Component<AppProps, AppState> {
   constructor(props: AppProps) {

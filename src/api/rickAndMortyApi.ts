@@ -1,4 +1,4 @@
-import type { RickAndMortyCharacterResponse } from "./rickAndMortyApi.types";
+import type { RickAndMortyCharacterResponse } from "./types";
 
 export class RickAndMortyApi {
   private endpoints: { [key: string]: string };
@@ -25,8 +25,6 @@ export class RickAndMortyApi {
   }
 
   async fetchCharacters(): Promise<RickAndMortyCharacterResponse> {
-    return this.fetchData<RickAndMortyCharacterResponse>(
-      this.endpoints.characters,
-    );
+    return this.fetchData<RickAndMortyCharacterResponse>(this.endpoints.characters);
   }
 }

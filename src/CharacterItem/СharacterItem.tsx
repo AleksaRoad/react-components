@@ -1,6 +1,6 @@
 import { memo } from "react";
 import styles from "./CharacterItem.module.css";
-import type { CharacterItemProps } from "./characterItem.types.ts";
+import type { CharacterItemProps } from "./types.ts";
 
 const CharacterItemComponent = ({ character }: CharacterItemProps) => {
   return (
@@ -10,11 +10,7 @@ const CharacterItemComponent = ({ character }: CharacterItemProps) => {
         <span>
           Species: {character.species} - Gender: {character.gender}
         </span>
-        <img
-          className={styles.characterImage}
-          src={character.image}
-          alt={character.name}
-        />
+        <img className={styles.characterImage} src={character.image} alt={character.name} />
       </div>
     </li>
   );
