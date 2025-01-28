@@ -10,7 +10,11 @@ const CharacterItemComponent = ({ character }: CharacterItemProps) => {
         <span>
           Species: {character.species} - Gender: {character.gender}
         </span>
-        <img className={styles.characterImage} src={character.image} alt={character.name} />
+        <img
+          className={styles.characterImage}
+          src={character.image}
+          alt={character.name}
+        />
       </div>
     </li>
   );

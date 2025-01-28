@@ -25,6 +25,8 @@ export class RickAndMortyApi {
   }
 
   async fetchCharacters(): Promise<RickAndMortyCharacterResponse> {
-    return this.fetchData<RickAndMortyCharacterResponse>(this.endpoints.characters);
+    return this.fetchData<RickAndMortyCharacterResponse>(
+      this.endpoints.characters,
+    );
   }
 }
