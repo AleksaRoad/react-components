@@ -5,9 +5,12 @@
 
   width: 100%;
   padding: 10px 20px;
+  border-radius: 20px;
 
   font-size: 1rem;
   color: #000;
+
+  background-color: #dff9f9c2;
 }
 
 .characterImage {
