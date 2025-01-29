@@ -4,7 +4,6 @@ import type { CharacterItemProps } from './types.ts';
 import { BASE_URL } from '@/api/constants.ts';
 
 const CharacterItemComponent = ({ character }: CharacterItemProps) => {
-  console.log(`${BASE_URL}/avatar/${character.id}.jpeg`);
   return (
     <li className={styles.item}>
       <span>{character.name}</span>
