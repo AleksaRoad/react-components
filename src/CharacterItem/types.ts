@@ -1,4 +1,4 @@
-import { RickAndMortyCharacter } from '@/api/types';
+import type { RickAndMortyCharacter } from '@/api/types';
 
 export interface CharacterItemProps {
   character: RickAndMortyCharacter;

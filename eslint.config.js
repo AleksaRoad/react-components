@@ -13,6 +13,10 @@ export default tseslint.config(
     extends: [js.configs.recommended, ...tseslint.configs.strict],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
+      parserOptions: {
+        projectService: true,
+        tsconfigRootDir: import.meta.dirname,
+      },
       ecmaVersion: 2020,
       globals: globals.browser,
     },
@@ -24,6 +28,8 @@ export default tseslint.config(
       jsxA11y,
     },
     rules: {
+      '@typescript-eslint/consistent-type-exports': 'error',
+      '@typescript-eslint/consistent-type-imports': 'error',
       ...reactHooks.configs.recommended.rules,
       'react-refresh/only-export-components': [
         'warn',

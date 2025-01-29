@@ -1,11 +1,11 @@
 import { Component } from 'react';
 import styles from './App.module.css';
 import { RickAndMortyApi } from '@/api/rickAndMortyApi';
-import {
+import type {
   RickAndMortyCharacter,
   RickAndMortyCharacterResponse,
 } from '@/api/types';
-import { AppProps, AppState } from './types';
+import type { AppProps, AppState } from './types';
 import { CharacterItem } from '@/CharacterItem/СharacterItem';
 import { SearchForm } from '@/SearchForm/SearchForm';
 
