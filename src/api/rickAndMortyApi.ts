@@ -1,16 +1,7 @@
-import type { RickAndMortyCharacterResponse } from './types';
+import { BASE_URL } from './constants';
+import type { RickAndMortyCharacter } from './types';
 
 export class RickAndMortyApi {
-  private endpoints: { [key: string]: string };
-
-  constructor(baseUrl: string = 'https://rickandmortyapi.com/api') {
-    this.endpoints = {
-      characters: `${baseUrl}/character`,
-      locations: `${baseUrl}/location`,
-      episodes: `${baseUrl}/episode`,
-    };
-  }
-
   private async fetchData<T>(url: string): Promise<T> {
     try {
       const response = await fetch(url);
@@ -24,9 +15,7 @@ export class RickAndMortyApi {
     }
   }
 
-  async fetchCharacters(): Promise<RickAndMortyCharacterResponse> {
-    return this.fetchData<RickAndMortyCharacterResponse>(
-      this.endpoints.characters
-    );
+  async fetchCharacters(): Promise<RickAndMortyCharacter[]> {
+    return this.fetchData<RickAndMortyCharacter[]>(BASE_URL.api);
   }
 }

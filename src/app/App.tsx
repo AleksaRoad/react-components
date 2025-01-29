@@ -1,10 +1,7 @@
 import { Component } from 'react';
 import styles from './App.module.css';
 import { RickAndMortyApi } from '@/api/rickAndMortyApi';
-import type {
-  RickAndMortyCharacter,
-  RickAndMortyCharacterResponse,
-} from '@/api/types';
+import type { RickAndMortyCharacter } from '@/api/types';
 import type { AppProps, AppState } from './types';
 import { CharacterItem } from '@/CharacterItem/СharacterItem';
 import { SearchForm } from '@/SearchForm/SearchForm';
@@ -20,13 +17,14 @@ export class App extends Component<AppProps, AppState> {
   async componentDidMount() {
     if (!this.props.characters || this.props.characters.length === 0) {
       const api = new RickAndMortyApi();
-      const data: RickAndMortyCharacterResponse = await api.fetchCharacters();
-      this.setState({ characters: data.results });
+      const data: RickAndMortyCharacter[] = await api.fetchCharacters();
+      this.setState({ characters: data });
     }
   }
 
   render() {
     const { characters } = this.state;
+    console.log(characters);
     return (
       <div className={styles.container}>
         <h1 className={styles.title}>Rick and Morty Characters</h1>
