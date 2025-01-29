@@ -1,6 +1,6 @@
 # Rick and Morty API Search Application
 
-This application performs search and displays information obtained from the ["Rick and Morty" API](https://rickandmortyapi.com/api)
+"This application performs searches and displays information obtained from the private ['Rick and Morty' API](https://rickandmortyapi-sigma.vercel.app/api/character), while avatars are sourced from the [official API](https://rickandmortyapi.com/documentation/#get-character-information)."
 
 ## Installation and Setup
 
