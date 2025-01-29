@@ -24,7 +24,6 @@ export class App extends Component<AppProps, AppState> {
 
   render() {
     const { characters } = this.state;
-    console.log(characters);
     return (
       <div className={styles.container}>
         <h1 className={styles.title}>Rick and Morty Characters</h1>
