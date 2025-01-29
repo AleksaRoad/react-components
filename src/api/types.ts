@@ -8,4 +8,5 @@ export interface RickAndMortyCharacter {
   created: string;
   origin: string;
   location: string;
+  image?: string;
 }

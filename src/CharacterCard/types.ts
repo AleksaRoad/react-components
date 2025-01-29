@@ -1,5 +1,6 @@
 import type { RickAndMortyCharacter } from '@/api/types';
 
-export interface CharacterItemProps {
+export interface CharacterCardProps {
   character: RickAndMortyCharacter;
+  image: string;
 }
