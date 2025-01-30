@@ -1,16 +1,7 @@
 import { BASE_URL } from './constants';
 import type { RickAndMortyCharacter } from './types';
 
-export class RickAndMortyApi {
-  private static instance: RickAndMortyApi;
-
-  public static getInstance(): RickAndMortyApi {
-    if (!RickAndMortyApi.instance) {
-      RickAndMortyApi.instance = new RickAndMortyApi();
-    }
-    return RickAndMortyApi.instance;
-  }
-
+class RickAndMortyApi {
   private async fetchData<T>(url: string): Promise<T> {
     try {
       const response = await fetch(url);
@@ -30,7 +21,8 @@ export class RickAndMortyApi {
   }
 
   async getCharacterById(id: number): Promise<string> {
-    const url = `${BASE_URL.avatar}/character/avatar/${id}.jpeg`;
-    return url;
+    return `${BASE_URL.avatar}/character/avatar/${id}.jpeg`;
   }
 }
+
+export const rickAndMortyApi = new RickAndMortyApi();

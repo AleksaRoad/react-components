@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import styles from './App.module.css';
-import { RickAndMortyApi } from '@/api/rickAndMortyApi';
+import { rickAndMortyApi } from '@/api/rickAndMortyApi';
 import type { RickAndMortyCharacter } from '@/api/types';
 import type { AppProps, AppState } from './types';
 import { CharacterCard } from '@/CharacterCard/СharacterCard';
@@ -15,11 +15,11 @@ export class App extends Component<AppProps, AppState> {
   }
 
   async componentDidMount() {
-    const api = RickAndMortyApi.getInstance();
-    const characters: RickAndMortyCharacter[] = await api.getAllCharacters();
+    const characters: RickAndMortyCharacter[] =
+      await rickAndMortyApi.getAllCharacters();
     const charactersWithImages = await Promise.all(
       characters.map(async (character) => {
-        const imageUrl = await api.getCharacterById(character.id);
+        const imageUrl = await rickAndMortyApi.getCharacterById(character.id);
         return { ...character, image: imageUrl };
       })
     );
