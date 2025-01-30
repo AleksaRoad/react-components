@@ -2,17 +2,14 @@ import { Component } from 'react';
 import styles from './App.module.css';
 import { rickAndMortyApi } from '@/api/rickAndMortyApi';
 import type { RickAndMortyCharacter } from '@/api/types';
-import type { AppProps, AppState } from './types';
-import { CharacterCard } from '@/CharacterCard/СharacterCard';
+import type { AppState } from './types';
+import { CharacterCard } from '@/CharacterCard/CharacterCard';
 import { SearchForm } from '@/SearchForm/SearchForm';
 
-export class App extends Component<AppProps, AppState> {
-  constructor(props: AppProps) {
-    super(props);
-    this.state = {
-      characters: props.characters || [],
-    };
-  }
+export class App extends Component<unknown, AppState> {
+  state = {
+    characters: [],
+  };
 
   async componentDidMount() {
     const characters: RickAndMortyCharacter[] =
@@ -35,15 +32,13 @@ export class App extends Component<AppProps, AppState> {
           <SearchForm />
         </div>
         <div className={styles.itemsContainer}>
-          <div className={styles.list}>
+          <ul className={styles.list}>
             {characters.map((character: RickAndMortyCharacter) => (
-              <CharacterCard
-                key={character.id}
-                character={character}
-                image={character.image || '/assets/images/no-avatar.png'}
-              />
+              <li key={character.id}>
+                <CharacterCard key={character.id} character={character} />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </div>
     );

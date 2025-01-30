@@ -2,7 +2,7 @@ import { memo } from 'react';
 import styles from './CharacterCard.module.css';
 import type { CharacterCardProps } from './types.ts';
 
-const CharacterCardComponent = ({ character, image }: CharacterCardProps) => {
+const CharacterCardComponent = ({ character }: CharacterCardProps) => {
   return (
     <div className={styles.item}>
       <span>{character.name}</span>
@@ -12,7 +12,7 @@ const CharacterCardComponent = ({ character, image }: CharacterCardProps) => {
         </span>
         <img
           className={styles.characterImage}
-          src={image}
+          src={character.image}
           alt={character.name}
         />
       </div>

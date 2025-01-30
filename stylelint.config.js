@@ -19,9 +19,6 @@ export default {
   overrides: [
     {
       files: ['*.css', '**/*.css'],
-      rules: {
-        'at-rule-disallowed-list': ['import'],
-      },
     },
   ],
 };
