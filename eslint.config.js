@@ -1,4 +1,5 @@
 import jsxA11y from 'eslint-plugin-jsx-a11y';
+import eslintPrettier from 'eslint-config-prettier';
 import js from '@eslint/js';
 import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
@@ -10,7 +11,11 @@ import reactCompiler from 'eslint-plugin-react-compiler';
 export default tseslint.config(
   { ignores: ['dist'] },
   {
-    extends: [js.configs.recommended, ...tseslint.configs.strict],
+    extends: [
+      js.configs.recommended,
+      ...tseslint.configs.strict,
+      eslintPrettier,
+    ],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       parserOptions: {
