@@ -14,9 +14,25 @@ class RickAndMortyApi {
       throw error;
     }
   }
+  public getFromLocalStorage(key: string): string | null {
+    const cachedValue = localStorage.getItem(key);
+    if (cachedValue === null || cachedValue.trim() === '') {
+      return null;
+    }
+    return JSON.parse(cachedValue);
+  }
 
-  async getAllCharacters(): Promise<RickAndMortyCharacter[]> {
-    const url = `${BASE_URL.api}/character`;
+  public saveToLocalStorage(key: string, cachedValue: string): void {
+    localStorage.setItem(key, JSON.stringify(cachedValue));
+  }
+
+  async getCharacters(
+    searchQuery: string = ''
+  ): Promise<RickAndMortyCharacter[]> {
+    let url = `${BASE_URL.api}/character`;
+    if (searchQuery && searchQuery.trim() !== '') {
+      url = `${url}?q=${searchQuery}`;
+    }
     return this.fetchData<RickAndMortyCharacter[]>(url);
   }
 

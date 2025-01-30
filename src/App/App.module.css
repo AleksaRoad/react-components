@@ -20,13 +20,6 @@ body {
   font-size: 3rem;
 }
 
-.searchContainer {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-  justify-content: center;
-}
-
 .itemsContainer {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));

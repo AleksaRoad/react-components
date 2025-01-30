@@ -1,19 +1,30 @@
 import { Component } from 'react';
-import styles from './App.module.css';
 import { rickAndMortyApi } from '@/api/rickAndMortyApi';
 import type { RickAndMortyCharacter } from '@/api/types';
-import type { AppState } from './types';
-import { CharacterCard } from '@/CharacterCard/CharacterCard';
 import { SearchForm } from '@/SearchForm/SearchForm';
+import { CharacterCard } from '@/CharacterCard/CharacterCard';
+import styles from './App.module.css';
+import { CACHE_KEY } from '@/api/constants';
 
-export class App extends Component<unknown, AppState> {
+export class App extends Component {
   state = {
     characters: [],
+    searchQuery: '',
   };
 
   async componentDidMount() {
-    const characters: RickAndMortyCharacter[] =
-      await rickAndMortyApi.getAllCharacters();
+    const savedSearchQuery = rickAndMortyApi.getFromLocalStorage(
+      CACHE_KEY.searchQuery
+    );
+    if (savedSearchQuery) {
+      this.setState({ searchQuery: savedSearchQuery });
+      this.fetchCharacters(savedSearchQuery);
+    } else {
+      this.fetchCharacters();
+    }
+  }
+  async fetchCharacters(searchQuery: string = '') {
+    const characters = await rickAndMortyApi.getCharacters(searchQuery);
     const charactersWithImages = await Promise.all(
       characters.map(async (character) => {
         const imageUrl = await rickAndMortyApi.getCharacterById(character.id);
@@ -23,19 +34,28 @@ export class App extends Component<unknown, AppState> {
     this.setState({ characters: charactersWithImages });
   }
 
+  handleSearch = async (searchQuery: string) => {
+    this.setState({ searchQuery });
+
+    if (searchQuery) {
+      rickAndMortyApi.saveToLocalStorage(CACHE_KEY.searchQuery, searchQuery);
+    } else {
+      rickAndMortyApi.saveToLocalStorage(CACHE_KEY.searchQuery, '');
+    }
+    this.fetchCharacters(searchQuery);
+  };
+
   render() {
     const { characters } = this.state;
     return (
       <div className={styles.container}>
         <h1 className={styles.title}>Rick and Morty Characters</h1>
-        <div className={styles.searchContainer}>
-          <SearchForm />
-        </div>
+        <SearchForm onSearch={this.handleSearch} />
         <div className={styles.itemsContainer}>
           <ul className={styles.list}>
             {characters.map((character: RickAndMortyCharacter) => (
               <li key={character.id}>
-                <CharacterCard key={character.id} character={character} />
+                <CharacterCard character={character} />
               </li>
             ))}
           </ul>
