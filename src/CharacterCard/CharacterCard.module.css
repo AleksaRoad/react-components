@@ -1,10 +1,11 @@
 .item {
   display: flex;
+  flex-direction: column;
+  gap: 20px;
   align-items: center;
-  justify-content: space-between;
 
-  width: 100%;
-  padding: 10px 20px;
+  width: 280px;
+  padding: 20px;
   border-radius: 20px;
 
   font-size: 1rem;
@@ -13,15 +14,40 @@
   background-color: #dff9f9c2;
 }
 
+.name {
+  margin: 0;
+  font-size: 1.5rem;
+}
+
 .characterImage {
   width: 100px;
   height: 100px;
+  border: 3px solid #ffffff78;
   border-radius: 50%;
 }
 
 .description {
   display: flex;
+  flex-direction: column;
   gap: 15px;
-  align-items: center;
+
+  width: 100%;
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+.info {
+  display: flex;
   justify-content: space-between;
+  width: 100%;
+}
+
+.info > :first-child {
+  text-align: left; /* Первый элемент слева */
+}
+
+.info > :last-child {
+  text-align: right; /* Второй элемент справа */
 }

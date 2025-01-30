@@ -51,15 +51,13 @@ export class App extends Component {
       <div className={styles.container}>
         <h1 className={styles.title}>Rick and Morty Characters</h1>
         <SearchForm onSearch={this.handleSearch} />
-        <div className={styles.itemsContainer}>
-          <ul className={styles.list}>
-            {characters.map((character: RickAndMortyCharacter) => (
-              <li key={character.id}>
-                <CharacterCard character={character} />
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className={styles.list}>
+          {characters.map((character: RickAndMortyCharacter) => (
+            <li key={character.id}>
+              <CharacterCard character={character} />
+            </li>
+          ))}
+        </ul>
       </div>
     );
   }
