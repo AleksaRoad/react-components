@@ -42,7 +42,7 @@ export class SearchForm extends Component<SearchFormProps> {
             className={styles.input}
             type="search"
             ref={this.searchInput}
-            placeholder="Search for characters"
+            placeholder="Enter search term"
             onFocus={this.handleFocus}
           />
           <button className={styles.button} type="submit">
