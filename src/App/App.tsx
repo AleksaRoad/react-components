@@ -3,7 +3,7 @@ import styles from './App.module.css';
 import { RickAndMortyApi } from '@/api/rickAndMortyApi';
 import type { RickAndMortyCharacter } from '@/api/types';
 import type { AppProps, AppState } from './types';
-import { CharacterCardComponent } from '@/CharacterCard/СharacterCard';
+import { CharacterCard } from '@/CharacterCard/СharacterCard';
 import { SearchForm } from '@/SearchForm/SearchForm';
 
 export class App extends Component<AppProps, AppState> {
@@ -37,7 +37,7 @@ export class App extends Component<AppProps, AppState> {
         <div className={styles.itemsContainer}>
           <div className={styles.list}>
             {characters.map((character: RickAndMortyCharacter) => (
-              <CharacterCardComponent
+              <CharacterCard
                 key={character.id}
                 character={character}
                 image={character.image || '/assets/images/no-avatar.png'}

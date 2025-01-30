@@ -2,7 +2,7 @@ import { memo } from 'react';
 import styles from './CharacterCard.module.css';
 import type { CharacterCardProps } from './types.ts';
 
-const CharacterCard = ({ character, image }: CharacterCardProps) => {
+const CharacterCardComponent = ({ character, image }: CharacterCardProps) => {
   return (
     <div className={styles.item}>
       <span>{character.name}</span>
@@ -20,6 +20,6 @@ const CharacterCard = ({ character, image }: CharacterCardProps) => {
   );
 };
 
-CharacterCard.displayName = 'CharacterCard';
+CharacterCardComponent.displayName = 'CharacterCard';
 
-export const CharacterCardComponent = memo(CharacterCard);
+export const CharacterCard = memo(CharacterCardComponent);
