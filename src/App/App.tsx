@@ -1,12 +1,13 @@
 import { Component } from 'react';
-import { rickAndMortyApi } from '@/api/rickAndMortyApi';
-import type { RickAndMortyCharacter } from '@/api/types';
+import { rickAndMortyApi } from '@/services/api/rickAndMortyApi';
+import type { RickAndMortyCharacter } from '@/services/api/types';
 import { SearchForm } from '@/SearchForm/SearchForm';
 import { CharacterCard } from '@/CharacterCard/CharacterCard';
 import styles from './App.module.css';
-import { CACHE_KEY } from '@/api/constants';
+import { CACHE_KEY } from '@/services/api/constants';
 import type { AppState } from './types';
 import { PaginationControl } from '@/PaginationControl/PaginationControl';
+import { storageService } from '@/services/storageService';
 
 export class App extends Component<unknown, AppState> {
   state: AppState = {
@@ -18,7 +19,7 @@ export class App extends Component<unknown, AppState> {
 
   async componentDidMount() {
     const totalPages = await rickAndMortyApi.getTotalPages();
-    const savedSearchQuery = rickAndMortyApi.getFromLocalStorage(
+    const savedSearchQuery = storageService.loadSearchQuery(
       CACHE_KEY.searchQuery
     );
 
@@ -52,7 +53,7 @@ export class App extends Component<unknown, AppState> {
 
   handleSearch = (searchQuery: string) => {
     this.setState({ searchQuery, currentPage: 1 }, () => {
-      rickAndMortyApi.saveToLocalStorage(CACHE_KEY.searchQuery, searchQuery);
+      storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
       this.fetchCharacters(searchQuery);
     });
   };

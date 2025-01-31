@@ -14,17 +14,6 @@ class RickAndMortyApi {
       throw error;
     }
   }
-  public getFromLocalStorage(key: string): string | null {
-    const cachedValue = localStorage.getItem(key);
-    if (cachedValue === null || cachedValue.trim() === '') {
-      return null;
-    }
-    return JSON.parse(cachedValue);
-  }
-
-  public saveToLocalStorage(key: string, cachedValue: string): void {
-    localStorage.setItem(key, JSON.stringify(cachedValue));
-  }
 
   async getCharacters(
     searchQuery: string = '',

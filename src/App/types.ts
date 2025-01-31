@@ -1,4 +1,4 @@
-import type { RickAndMortyCharacter } from '@/api/types';
+import type { RickAndMortyCharacter } from '@/services/api/types';
 
 export interface AppState {
   characters: RickAndMortyCharacter[];

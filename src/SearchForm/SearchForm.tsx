@@ -1,15 +1,15 @@
 import type { FormEvent, RefObject } from 'react';
 import { Component, createRef } from 'react';
-import { CACHE_KEY } from '@/api/constants';
-import { rickAndMortyApi } from '@/api/rickAndMortyApi';
+import { CACHE_KEY } from '@/services/api/constants';
 import styles from './SearchForm.module.css';
 import type { SearchFormProps } from './types';
+import { storageService } from '@/services/storageService';
 
 export class SearchForm extends Component<SearchFormProps> {
   private searchInput: RefObject<HTMLInputElement | null> = createRef();
 
   componentDidMount() {
-    const savedSearchQuery = rickAndMortyApi.getFromLocalStorage(
+    const savedSearchQuery = storageService.loadSearchQuery(
       CACHE_KEY.searchQuery
     );
     if (savedSearchQuery && this.searchInput.current) {
@@ -21,7 +21,7 @@ export class SearchForm extends Component<SearchFormProps> {
     event.preventDefault();
     const searchQuery = this.searchInput.current?.value.trim() || '';
     if (searchQuery) {
-      rickAndMortyApi.saveToLocalStorage(CACHE_KEY.searchQuery, searchQuery);
+      storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
       this.props.onSearch(searchQuery);
     } else {
       this.props.onSearch('');
