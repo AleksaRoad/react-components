@@ -1,6 +1,6 @@
-import { PAGE_SIZE, ERROR_MESSAGES } from '@/shared/constants';
-import type { RickAndMortyCharacter } from '@/shared/types';
-import { rickAndMortyApi } from './api/rickAndMortyApi';
+import { PAGE_SIZE, ERROR_MESSAGES } from '@/shared';
+import type { RickAndMortyCharacter } from '@/shared';
+import { rickAndMortyApi } from './api';
 
 const getCharacters = {
   async fetchCharacters(searchQuery: string, page: number) {

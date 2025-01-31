@@ -1,17 +1,17 @@
 import { Component } from 'react';
-import type { RickAndMortyCharacter } from '@/shared/types';
-import { SearchForm } from '@/SearchForm/SearchForm';
-import { CharacterCard } from '@/CharacterCard/CharacterCard';
+import type { RickAndMortyCharacter } from '@/shared';
+import { SearchForm } from '@/SearchForm';
+import { CharacterCard } from '@/CharacterCard';
 import styles from './App.module.css';
-import { CACHE_KEY, ERROR_MESSAGES } from '@/shared/constants';
+import { CACHE_KEY, ERROR_MESSAGES } from '@/shared';
 import type { AppState, CustomError } from './types';
-import { PaginationControl } from '@/PaginationControl/PaginationControl';
-import { storageService } from '@/services/storageService';
-import { Spinner } from '@/App/Spinner/Spinner';
+import { PaginationControl } from '@/PaginationControl';
+import { storageService } from '@/services';
+import { Spinner } from '@/App';
 import clsx from 'clsx';
-import { rickAndMortyService } from '@/services/rickAndMortyService';
-import { ErrorBoundary } from '@/services/errorBoundary/errorBoundary';
-import { ErrorBoundaryButton } from '@/services/errorBoundary/ErrorBoundaryButton';
+import { rickAndMortyService } from '@/services';
+import { ErrorBoundary } from '@/services';
+import { ErrorBoundaryButton } from '@/services';
 
 export class App extends Component<unknown, AppState> {
   state: AppState = {

@@ -1,6 +1,6 @@
 import { BASE_URL, ENDPOINTS } from './constants';
-import type { RickAndMortyCharacter } from '@/shared/types';
-import { ERROR_MESSAGES, PAGE_SIZE } from '@/shared/constants';
+import type { RickAndMortyCharacter } from '@/shared';
+import { ERROR_MESSAGES, PAGE_SIZE } from '@/shared';
 
 class RickAndMortyApi {
   private async fetchData<T>(

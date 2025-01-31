@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import type { ErrorBoundaryProps, ErrorBoundaryState } from './types';
 import type { ErrorInfo } from 'react-dom/client';
-import { ERROR_MESSAGES } from '@/shared/constants';
+import { ERROR_MESSAGES } from '@/shared';
 
 export class ErrorBoundary extends Component<
   ErrorBoundaryProps,

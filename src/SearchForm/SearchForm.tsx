@@ -1,9 +1,9 @@
 import type { FormEvent, RefObject } from 'react';
 import { Component, createRef } from 'react';
-import { CACHE_KEY } from '@/shared/constants';
+import { CACHE_KEY } from '@/shared';
 import styles from './SearchForm.module.css';
 import type { SearchFormProps } from './types';
-import { storageService } from '@/services/storageService';
+import { storageService } from '@/services';
 
 export class SearchForm extends Component<SearchFormProps> {
   private searchInput: RefObject<HTMLInputElement | null> = createRef();
