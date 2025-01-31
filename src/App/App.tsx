@@ -21,10 +21,9 @@ export class App extends Component<unknown, AppState> {
   };
 
   async componentDidMount() {
-    const savedSearchQuery = storageService.loadSearchQuery(
-      CACHE_KEY.searchQuery
-    );
-    await this.loadData(savedSearchQuery || '', 1);
+    const savedSearchQuery =
+      storageService.loadSearchQuery(CACHE_KEY.searchQuery) || '';
+    await this.loadData(savedSearchQuery, 1);
   }
 
   async loadData(searchQuery: string, page: number) {
