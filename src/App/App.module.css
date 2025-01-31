@@ -40,6 +40,17 @@ body {
   justify-content: center;
 }
 
+.noResults {
+  padding-block: 30px;
+  font-size: 1.5rem;
+  text-align: center;
+}
+
+.searchQuery {
+  font-size: 2rem;
+  color: #de0a5e;
+}
+
 @media screen and (width <= 768px) {
   .header {
     flex-direction: column;
@@ -50,14 +61,4 @@ body {
   .list {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   }
-
-  .noResults {
-    font-size: 1.5rem;
-    text-align: center;
-  }
-}
-
-.searchQuery {
-  font-size: 2rem;
-  color: #de0a5e;
 }
