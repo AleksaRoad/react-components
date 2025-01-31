@@ -1,4 +1,4 @@
-import { BASE_URL } from './constants';
+import { BASE_URL, PAGE_SIZE } from './constants';
 import type { RickAndMortyCharacter } from './types';
 
 class RickAndMortyApi {
@@ -27,13 +27,20 @@ class RickAndMortyApi {
   }
 
   async getCharacters(
-    searchQuery: string = ''
+    searchQuery: string = '',
+    page: number = 1
   ): Promise<RickAndMortyCharacter[]> {
     let url = `${BASE_URL.api}/character`;
     if (searchQuery && searchQuery.trim() !== '') {
-      url = `${url}?q=${searchQuery}`;
+      url = `${url}?q=${searchQuery}&_page=${page}`;
     }
     return this.fetchData<RickAndMortyCharacter[]>(url);
+  }
+
+  async getTotalPages(): Promise<number> {
+    const characters = await this.getCharacters();
+    const totalCount = characters.length;
+    return Math.ceil(totalCount / PAGE_SIZE);
   }
 
   async getCharacterById(id: number): Promise<string> {

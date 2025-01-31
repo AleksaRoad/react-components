@@ -6,3 +6,5 @@ export const BASE_URL = {
 export const CACHE_KEY = {
   searchQuery: 'RAM_SearchQuery',
 };
+
+export const PAGE_SIZE = 10;
