@@ -16,9 +16,10 @@ export const PaginationControl = ({
       >
         Previous
       </button>
-      <span>
-        Page {currentPage} of {totalPages}
-      </span>
+      <div className={styles.pageInfo}>
+        Page<span className={styles.currentPage}>{currentPage}</span>of
+        <span className={styles.totalPages}>{totalPages}</span>
+      </div>
       <button
         className={styles.button}
         onClick={onNextPage}

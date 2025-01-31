@@ -4,7 +4,7 @@ import type { CharacterCardProps } from './types.ts';
 
 const CharacterCardComponent = ({ character }: CharacterCardProps) => {
   return (
-    <div className={styles.item} key={character.id}>
+    <div className={styles.item}>
       <h1 className={styles.name}>{character.name}</h1>
       <img
         className={styles.characterImage}

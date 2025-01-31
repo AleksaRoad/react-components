@@ -1,13 +1,15 @@
 import { Component } from 'react';
-import { rickAndMortyApi } from '@/services/api/rickAndMortyApi';
-import type { RickAndMortyCharacter } from '@/services/api/types';
+import type { RickAndMortyCharacter } from '@/shared/types';
 import { SearchForm } from '@/SearchForm/SearchForm';
 import { CharacterCard } from '@/CharacterCard/CharacterCard';
 import styles from './App.module.css';
-import { CACHE_KEY } from '@/services/api/constants';
+import { CACHE_KEY, ERROR_MESSAGES } from '@/shared/constants';
 import type { AppState } from './types';
 import { PaginationControl } from '@/PaginationControl/PaginationControl';
 import { storageService } from '@/services/storageService';
+import { Spinner } from '@/App/Spinner/Spinner';
+import clsx from 'clsx';
+import { rickAndMortyService } from '@/services/rickAndMortyService';
 
 export class App extends Component<unknown, AppState> {
   state: AppState = {
@@ -15,92 +17,84 @@ export class App extends Component<unknown, AppState> {
     searchQuery: '',
     currentPage: 1,
     totalPages: 0,
+    loading: false,
   };
 
   async componentDidMount() {
-    const totalPages = await rickAndMortyApi.getTotalPages();
     const savedSearchQuery = storageService.loadSearchQuery(
       CACHE_KEY.searchQuery
     );
-
-    this.setState({ totalPages });
-    if (savedSearchQuery) {
-      this.setState({ searchQuery: savedSearchQuery }, () => {
-        this.fetchCharacters(savedSearchQuery);
-      });
-    } else {
-      this.fetchCharacters();
-    }
+    await this.loadData(savedSearchQuery || '', 1);
   }
 
-  async fetchCharacters(searchQuery: string = '') {
+  async loadData(searchQuery: string, page: number) {
+    this.setState({ loading: true });
+
     try {
-      const characters = await rickAndMortyApi.getCharacters(
+      const { charactersWithImages, totalPages } =
+        await rickAndMortyService.fetchCharacters(searchQuery, page);
+      this.setState({
+        characters: charactersWithImages,
+        totalPages,
         searchQuery,
-        this.state.currentPage
-      );
-      const charactersWithImages = await Promise.all(
-        characters.map(async (character) => {
-          const imageUrl = await rickAndMortyApi.getCharacterById(character.id);
-          return { ...character, image: imageUrl };
-        })
-      );
-      this.setState({ characters: charactersWithImages });
+        loading: false,
+      });
     } catch (error) {
-      console.error('Failed to fetch characters:', error);
+      console.error(ERROR_MESSAGES.FAILED_TO_FETCH_DATA, error);
+      this.setState({ loading: false });
     }
   }
 
   handleSearch = (searchQuery: string) => {
-    this.setState({ searchQuery, currentPage: 1 }, () => {
+    this.setState({ searchQuery, currentPage: 1, loading: true }, () => {
       storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
-      this.fetchCharacters(searchQuery);
+      this.loadData(searchQuery, 1);
     });
   };
 
-  handleNextPage = () => {
-    if (this.state.currentPage < this.state.totalPages) {
-      this.setState(
-        (prevState) => ({ currentPage: prevState.currentPage + 1 }),
-        () => this.fetchCharacters(this.state.searchQuery)
-      );
-    }
-  };
-
-  handlePreviousPage = () => {
-    if (this.state.currentPage > 1) {
-      this.setState(
-        (prevState) => ({ currentPage: prevState.currentPage - 1 }),
-        () => this.fetchCharacters(this.state.searchQuery)
-      );
-    }
+  handlePageChange = (page: number) => {
+    this.setState({ currentPage: page, loading: true }, () => {
+      this.loadData(this.state.searchQuery, page);
+    });
   };
 
   render() {
-    const { characters, currentPage, totalPages } = this.state;
+    const { characters, currentPage, totalPages, loading, searchQuery } =
+      this.state;
+    const isResultsFound = characters.length > 0;
+    const showPagination = searchQuery.length > 0 && totalPages > 1;
+
     return (
-      <div className={styles.container}>
+      <div className={styles.container} key="app-container">
         <h1 className={styles.title}>Rick and Morty Characters</h1>
         <div className={styles.header}>
           <SearchForm onSearch={this.handleSearch} />
-          <PaginationControl
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPreviousPage={this.handlePreviousPage}
-            onNextPage={this.handleNextPage}
-          />
+          {showPagination && (
+            <PaginationControl
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPreviousPage={() => this.handlePageChange(currentPage - 1)}
+              onNextPage={() => this.handlePageChange(currentPage + 1)}
+            />
+          )}
         </div>
-        <ul className={styles.list}>
-          {characters.length > 0 ? (
-            characters.map((character: RickAndMortyCharacter) => (
+
+        {loading ? (
+          <Spinner />
+        ) : isResultsFound ? (
+          <ul className={styles.list}>
+            {characters.map((character: RickAndMortyCharacter) => (
               <li key={character.id}>
                 <CharacterCard character={character} />
               </li>
-            ))
-          ) : (
-            <p>No characters found</p>
-          )}
-        </ul>
+            ))}
+          </ul>
+        ) : (
+          <p className={clsx(styles.noResults)}>
+            {`No results found for your search for `}
+            <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
+          </p>
+        )}
       </div>
     );
   }

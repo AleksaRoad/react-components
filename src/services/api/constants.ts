@@ -3,8 +3,10 @@ export const BASE_URL = {
   avatar: 'https://rickandmortyapi.com/api',
 };
 
-export const CACHE_KEY = {
-  searchQuery: 'RAM_SearchQuery',
+export const ENDPOINTS = {
+  character: 'character',
+  avatar: 'avatar',
+  _page: '_page',
+  _limit: '_limit',
+  query: 'q',
 };
-
-export const PAGE_SIZE = 10;

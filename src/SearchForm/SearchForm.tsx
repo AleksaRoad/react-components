@@ -1,6 +1,6 @@
 import type { FormEvent, RefObject } from 'react';
 import { Component, createRef } from 'react';
-import { CACHE_KEY } from '@/services/api/constants';
+import { CACHE_KEY } from '@/shared/constants';
 import styles from './SearchForm.module.css';
 import type { SearchFormProps } from './types';
 import { storageService } from '@/services/storageService';
