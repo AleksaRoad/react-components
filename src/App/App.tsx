@@ -69,16 +69,7 @@ export class App extends Component<unknown, AppState> {
         <h1 className={styles.title}>Rick and Morty Characters</h1>
         <div className={styles.header}>
           <SearchForm onSearch={this.handleSearch} />
-          {showPagination && (
-            <PaginationControl
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPreviousPage={() => this.handlePageChange(currentPage - 1)}
-              onNextPage={() => this.handlePageChange(currentPage + 1)}
-            />
-          )}
         </div>
-
         {loading ? (
           <Spinner />
         ) : isResultsFound ? (
@@ -95,6 +86,16 @@ export class App extends Component<unknown, AppState> {
             <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
           </p>
         )}
+        <div className={styles.footer}>
+          {showPagination && (
+            <PaginationControl
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPreviousPage={() => this.handlePageChange(currentPage - 1)}
+              onNextPage={() => this.handlePageChange(currentPage + 1)}
+            />
+          )}
+        </div>
       </div>
     );
   }
