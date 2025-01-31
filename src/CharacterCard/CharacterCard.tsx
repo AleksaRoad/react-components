@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import styles from './CharacterCard.module.css';
 import type { CharacterCardProps } from './types.ts';
+import { placeholderImage } from './constants.ts';
 
 const CharacterCardComponent = ({ character }: CharacterCardProps) => {
   return (
@@ -8,8 +9,9 @@ const CharacterCardComponent = ({ character }: CharacterCardProps) => {
       <h1 className={styles.name}>{character.name}</h1>
       <img
         className={styles.characterImage}
-        src={character.image}
+        src={character.image || placeholderImage}
         alt={character.name}
+        loading="lazy"
       />
       <ul className={styles.description}>
         <li className={styles.info}>
