@@ -6,4 +6,10 @@ export interface AppState {
   currentPage: number;
   totalPages: number;
   loading: boolean;
+  error: boolean;
+  errorMessage: string;
+}
+
+export interface CustomError extends Error {
+  status?: number;
 }

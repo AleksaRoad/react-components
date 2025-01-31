@@ -10,6 +10,7 @@
 }
 
 .input {
+  min-width: 250px;
   padding: 5px 10px;
   border: none;
   border-radius: 5px;
@@ -24,7 +25,7 @@
 .button {
   cursor: pointer;
 
-  padding: 5px 10px;
+  padding: 8px 15px;
   border: none;
   border-radius: 5px;
 
