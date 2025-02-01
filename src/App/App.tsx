@@ -60,11 +60,6 @@ export class App extends Component<unknown, AppState> {
     });
   };
 
-  handleError = (): void => {
-    this.setState({ error: true });
-    throw new Error(ERROR_MESSAGES.OOOPS);
-  };
-
   render() {
     const { characters, currentPage, totalPages, loading, searchQuery, error } =
       this.state;
@@ -104,7 +99,7 @@ export class App extends Component<unknown, AppState> {
                   onNextPage={() => this.handlePageChange(currentPage + 1)}
                 />
               )}
-              <ErrorBoundaryButton onClick={this.handleError} />
+              <ErrorBoundaryButton />
             </div>
           </div>
         )}

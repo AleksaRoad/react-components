@@ -2,6 +2,7 @@ import { Component } from 'react';
 import type { ErrorBoundaryProps, ErrorBoundaryState } from './types';
 import type { ErrorInfo } from 'react-dom/client';
 import { ERROR_MESSAGES } from '@/shared';
+import styles from './ErrorBoundary.module.css';
 
 export class ErrorBoundary extends Component<
   ErrorBoundaryProps,
@@ -23,7 +24,7 @@ export class ErrorBoundary extends Component<
   render() {
     if (this.state.hasError) {
       return (
-        <div>
+        <div className={styles.errorBoundary} key="error-boundary">
           <h1>Something went wrong.</h1>
           <p>{this.state.error?.message}</p>
         </div>
