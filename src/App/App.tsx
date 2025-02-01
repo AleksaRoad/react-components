@@ -4,7 +4,7 @@ import { SearchForm } from '@/SearchForm';
 import { CharacterCard } from '@/CharacterCard';
 import styles from './App.module.css';
 import { CACHE_KEY, ERROR_MESSAGES } from '@/shared';
-import type { AppState, CustomError } from './types';
+import type { AppState } from './types';
 import { PaginationControl } from '@/PaginationControl';
 import { storageService } from '@/services';
 import { Spinner } from '@/App';
@@ -21,7 +21,6 @@ export class App extends Component<unknown, AppState> {
     totalPages: 0,
     loading: false,
     error: false,
-    errorMessage: '',
   };
 
   async componentDidMount() {
@@ -41,99 +40,75 @@ export class App extends Component<unknown, AppState> {
         totalPages,
         searchQuery,
         loading: false,
-        error: false,
-        errorMessage: '',
       });
     } catch (error) {
       console.error(ERROR_MESSAGES.FAILED_TO_FETCH_DATA, error);
-      this.setState({
-        loading: false,
-        error: true,
-        errorMessage: ERROR_MESSAGES.FAILED_TO_FETCH_DATA,
-      });
+      this.setState({ loading: false });
     }
   }
 
   handleSearch = (searchQuery: string) => {
-    this.setState(
-      { searchQuery, currentPage: 1, loading: true, error: false },
-      () => {
-        storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
-        this.loadData(searchQuery, 1);
-      }
-    );
+    this.setState({ searchQuery, currentPage: 1, loading: true }, () => {
+      storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
+      this.loadData(searchQuery, 1);
+    });
   };
 
   handlePageChange = (page: number) => {
-    this.setState({ currentPage: page, loading: true, error: false }, () => {
+    this.setState({ currentPage: page, loading: true }, () => {
       this.loadData(this.state.searchQuery, page);
     });
   };
 
-  handleError = () => {
-    const error: CustomError = new Error(ERROR_MESSAGES.INTERNAL_SERVER_ERROR);
-    error.status = 400;
-    this.setState({ error: true, errorMessage: error.message });
-    throw error;
+  handleError = (): void => {
+    this.setState({ error: true });
+    throw new Error(ERROR_MESSAGES.OOOPS);
   };
 
   render() {
-    const {
-      characters,
-      currentPage,
-      totalPages,
-      loading,
-      searchQuery,
-      error,
-      errorMessage,
-    } = this.state;
+    const { characters, currentPage, totalPages, loading, searchQuery, error } =
+      this.state;
     const isResultsFound = characters.length > 0;
     const showPagination = searchQuery.length > 0 && totalPages > 1;
 
     return (
-      <div className={styles.container} key="app-container">
-        <h1 className={styles.title}>Rick and Morty Characters</h1>
-        <div className={styles.header}>
-          <SearchForm onSearch={this.handleSearch} />
-        </div>
-
-        {loading ? (
-          <Spinner />
-        ) : error ? (
-          <div className={styles.errorContent}>
-            <h2>{errorMessage}</h2>
+      <ErrorBoundary>
+        {!error && (
+          <div className={styles.container} key="app-container">
+            <h1 className={styles.title}>Rick and Morty Characters</h1>
+            <div className={styles.header}>
+              <SearchForm onSearch={this.handleSearch} />
+            </div>
+            {loading ? (
+              <Spinner />
+            ) : isResultsFound ? (
+              <ul className={styles.list}>
+                {characters.map((character: RickAndMortyCharacter) => (
+                  <li key={character.id}>
+                    <CharacterCard character={character} />
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className={clsx(styles.noResults)}>
+                {ERROR_MESSAGES.NO_RESULTS_FOUND}
+                <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
+              </p>
+            )}
+            <div className={styles.footer}>
+              {showPagination && (
+                <PaginationControl
+                  currentPage={currentPage}
+                  totalPages={totalPages}
+                  onPreviousPage={() => this.handlePageChange(currentPage - 1)}
+                  onNextPage={() => this.handlePageChange(currentPage + 1)}
+                />
+              )}
+              <ErrorBoundaryButton onClick={this.handleError} />
+            </div>
           </div>
-        ) : isResultsFound ? (
-          <ErrorBoundary fallback={errorMessage}>
-            <ul className={styles.list}>
-              {characters.map((character: RickAndMortyCharacter) => (
-                <li key={character.id}>
-                  <CharacterCard character={character} />
-                </li>
-              ))}
-            </ul>
-          </ErrorBoundary>
-        ) : (
-          <p className={clsx(styles.noResults)}>
-            {ERROR_MESSAGES.NO_RESULTS_FOUND}
-            <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
-          </p>
         )}
-
-        <div className={styles.footer}>
-          {showPagination && !error && (
-            <PaginationControl
-              currentPage={currentPage}
-              totalPages={totalPages}
-              onPreviousPage={() => this.handlePageChange(currentPage - 1)}
-              onNextPage={() => this.handlePageChange(currentPage + 1)}
-            />
-          )}
-          <ErrorBoundaryButton onClick={this.handleError}>
-            Trigger Error
-          </ErrorBoundaryButton>
-        </div>
-      </div>
+      </ErrorBoundary>
     );
   }
 }

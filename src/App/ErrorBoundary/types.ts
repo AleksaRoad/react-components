@@ -2,11 +2,10 @@ import { type ReactNode } from 'react';
 
 export type ErrorBoundaryButtonProps = {
   onClick: () => void;
-  children: ReactNode;
+  children?: ReactNode;
 };
 
 export type ErrorBoundaryProps = {
-  fallback: ReactNode;
   children: ReactNode;
 };
 

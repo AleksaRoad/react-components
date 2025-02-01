@@ -1,2 +1,2 @@
-export { ErrorBoundary } from './errorBoundary';
+export { ErrorBoundary } from './ErrorBoundary';
 export { ErrorBoundaryButton } from './ErrorBoundaryButton';

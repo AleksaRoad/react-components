@@ -7,9 +7,4 @@ export interface AppState {
   totalPages: number;
   loading: boolean;
   error: boolean;
-  errorMessage: string;
-}
-
-export interface CustomError extends Error {
-  status?: number;
 }
