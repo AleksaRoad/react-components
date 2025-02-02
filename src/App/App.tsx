@@ -10,7 +10,6 @@ import { storageService } from '@/services';
 import { Spinner } from '@/App';
 import clsx from 'clsx';
 import { rickAndMortyService } from '@/services';
-import { ErrorBoundary } from '@/services';
 import { ErrorBoundaryButton } from '@/services';
 
 export class App extends Component<unknown, AppState> {
@@ -67,43 +66,41 @@ export class App extends Component<unknown, AppState> {
     const showPagination = searchQuery.length > 0 && totalPages > 1;
 
     return (
-      <ErrorBoundary>
-        {!error && (
-          <div className={styles.container} key="app-container">
-            <h1 className={styles.title}>Rick and Morty Characters</h1>
-            <div className={styles.header}>
-              <SearchForm onSearch={this.handleSearch} />
-            </div>
-            {loading ? (
-              <Spinner />
-            ) : isResultsFound ? (
-              <ul className={styles.list}>
-                {characters.map((character: RickAndMortyCharacter) => (
-                  <li key={character.id}>
-                    <CharacterCard character={character} />
-                  </li>
-                ))}
-              </ul>
-            ) : (
-              <p className={clsx(styles.noResults)}>
-                {ERROR_MESSAGES.NO_RESULTS_FOUND}
-                <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
-              </p>
-            )}
-            <div className={styles.footer}>
-              {showPagination && (
-                <PaginationControl
-                  currentPage={currentPage}
-                  totalPages={totalPages}
-                  onPreviousPage={() => this.handlePageChange(currentPage - 1)}
-                  onNextPage={() => this.handlePageChange(currentPage + 1)}
-                />
-              )}
-              <ErrorBoundaryButton />
-            </div>
+      !error && (
+        <div className={styles.container} key="app-container">
+          <h1 className={styles.title}>Rick and Morty Characters</h1>
+          <div className={styles.header}>
+            <SearchForm onSearch={this.handleSearch} />
           </div>
-        )}
-      </ErrorBoundary>
+          {loading ? (
+            <Spinner />
+          ) : isResultsFound ? (
+            <ul className={styles.list}>
+              {characters.map((character: RickAndMortyCharacter) => (
+                <li key={character.id}>
+                  <CharacterCard character={character} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={clsx(styles.noResults)}>
+              {ERROR_MESSAGES.NO_RESULTS_FOUND}
+              <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
+            </p>
+          )}
+          <div className={styles.footer}>
+            {showPagination && (
+              <PaginationControl
+                currentPage={currentPage}
+                totalPages={totalPages}
+                onPreviousPage={() => this.handlePageChange(currentPage - 1)}
+                onNextPage={() => this.handlePageChange(currentPage + 1)}
+              />
+            )}
+            <ErrorBoundaryButton />
+          </div>
+        </div>
+      )
     );
   }
 }
