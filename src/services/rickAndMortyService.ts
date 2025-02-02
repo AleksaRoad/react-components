@@ -1,27 +1,21 @@
-import { PAGE_SIZE, ERROR_MESSAGES } from '@/shared';
+import { PAGE_SIZE } from '@/shared';
 import type { RickAndMortyCharacter } from '@/shared';
 import { rickAndMortyApi } from './api';
 
 const getCharacters = {
   async fetchCharacters(searchQuery: string, page: number) {
-    try {
-      const { characters, headers } = await rickAndMortyApi.getCharacters(
-        searchQuery,
-        page
-      );
-      const totalPages = headers.get('X-Total-Count')
-        ? Math.ceil(Number(headers.get('X-Total-Count')) / PAGE_SIZE)
-        : 1;
+    const { characters, headers } = await rickAndMortyApi.getCharacters(
+      searchQuery,
+      page
+    );
+    const totalPages = headers.get('X-Total-Count')
+      ? Math.ceil(Number(headers.get('X-Total-Count')) / PAGE_SIZE)
+      : 1;
+    const charactersWithImages = characters.map(
+      rickAndMortyService.addImagesToCharacters
+    );
 
-      const charactersWithImages = characters.map(
-        rickAndMortyService.addImagesToCharacters
-      );
-
-      return { charactersWithImages, totalPages };
-    } catch (error) {
-      console.error(ERROR_MESSAGES.FAILED_TO_FETCH_DATA, error);
-      throw error;
-    }
+    return { charactersWithImages, totalPages };
   },
 
   addImagesToCharacters(character: RickAndMortyCharacter) {

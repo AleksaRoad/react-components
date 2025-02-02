@@ -1,18 +1,13 @@
 import { memo } from 'react';
 import styles from './CharacterCard.module.css';
 import type { CharacterCardProps } from './types.ts';
-import { placeholderImage } from './constants.ts';
+import { ImageComponent } from '@/components/ImageComponent';
 
 const CharacterCardComponent = ({ character }: CharacterCardProps) => {
   return (
     <div className={styles.item}>
       <h1 className={styles.name}>{character.name}</h1>
-      <img
-        className={styles.characterImage}
-        src={character.image || placeholderImage}
-        alt={character.name}
-        loading="lazy"
-      />
+      <ImageComponent src={character.image} alt={character.name} />
       <ul className={styles.description}>
         <li className={styles.info}>
           <span>Species: </span>

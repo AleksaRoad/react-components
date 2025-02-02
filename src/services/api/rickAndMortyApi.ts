@@ -6,20 +6,14 @@ class RickAndMortyApi {
   private async fetchData<T>(
     url: string
   ): Promise<{ characters: T; headers: Headers }> {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
-      }
-
-      const headers = response.headers;
-      const characters: T = await response.json();
-
-      return { characters, headers };
-    } catch (error) {
-      console.error(ERROR_MESSAGES.FAILED_TO_FETCH_DATA, error);
-      throw error;
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
     }
+    const headers = response.headers;
+    const characters: T = await response.json();
+
+    return { characters, headers };
   }
 
   async getCharacters(

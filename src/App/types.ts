@@ -6,5 +6,5 @@ export interface AppState {
   currentPage: number;
   totalPages: number;
   loading: boolean;
-  error: boolean;
+  apiErrorMessage: string;
 }

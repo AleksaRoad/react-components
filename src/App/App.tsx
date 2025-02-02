@@ -1,16 +1,13 @@
 import { Component } from 'react';
-import type { RickAndMortyCharacter } from '@/shared';
-import { SearchForm } from '@/SearchForm';
-import { CharacterCard } from '@/CharacterCard';
 import styles from './App.module.css';
-import { CACHE_KEY, ERROR_MESSAGES } from '@/shared';
+import { CACHE_KEY } from '@/shared';
 import type { AppState } from './types';
-import { PaginationControl } from '@/PaginationControl';
 import { storageService } from '@/services';
-import { Spinner } from '@/App';
-import clsx from 'clsx';
 import { rickAndMortyService } from '@/services';
-import { ErrorBoundaryButton } from '@/services';
+import { Header } from '@/components/Header';
+import { Footer } from '@/components/Footer';
+import { Main } from '@/components/Main/Main';
+import { Spinner } from '../components/Spinner';
 
 export class App extends Component<unknown, AppState> {
   state: AppState = {
@@ -19,7 +16,7 @@ export class App extends Component<unknown, AppState> {
     currentPage: 1,
     totalPages: 0,
     loading: false,
-    error: false,
+    apiErrorMessage: '',
   };
 
   async componentDidMount() {
@@ -41,8 +38,8 @@ export class App extends Component<unknown, AppState> {
         loading: false,
       });
     } catch (error) {
-      console.error(ERROR_MESSAGES.FAILED_TO_FETCH_DATA, error);
-      this.setState({ loading: false });
+      const errorMessage = error instanceof Error ? error.message : `${error}`;
+      this.setState({ apiErrorMessage: errorMessage, loading: false });
     }
   }
 
@@ -60,47 +57,34 @@ export class App extends Component<unknown, AppState> {
   };
 
   render() {
-    const { characters, currentPage, totalPages, loading, searchQuery, error } =
+    const { characters, currentPage, totalPages, loading, searchQuery } =
       this.state;
-    const isResultsFound = characters.length > 0;
     const showPagination = searchQuery.length > 0 && totalPages > 1;
 
     return (
-      !error && (
-        <div className={styles.container} key="app-container">
-          <h1 className={styles.title}>Rick and Morty Characters</h1>
-          <div className={styles.header}>
-            <SearchForm onSearch={this.handleSearch} />
-          </div>
-          {loading ? (
-            <Spinner />
-          ) : isResultsFound ? (
-            <ul className={styles.list}>
-              {characters.map((character: RickAndMortyCharacter) => (
-                <li key={character.id}>
-                  <CharacterCard character={character} />
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={clsx(styles.noResults)}>
-              {ERROR_MESSAGES.NO_RESULTS_FOUND}
-              <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
-            </p>
-          )}
-          <div className={styles.footer}>
-            {showPagination && (
-              <PaginationControl
-                currentPage={currentPage}
-                totalPages={totalPages}
-                onPreviousPage={() => this.handlePageChange(currentPage - 1)}
-                onNextPage={() => this.handlePageChange(currentPage + 1)}
-              />
-            )}
-            <ErrorBoundaryButton />
-          </div>
-        </div>
-      )
+      <div className={styles.container} key="app-container">
+        <h1 className={styles.title}>Rick and Morty Characters</h1>
+        <Header
+          onSearch={this.handleSearch}
+          apiErrorMessage={this.state.apiErrorMessage}
+        />
+        {loading ? (
+          <Spinner />
+        ) : (
+          <Main
+            characters={characters}
+            searchQuery={searchQuery}
+            apiErrorMessage={this.state.apiErrorMessage}
+          />
+        )}
+        <Footer
+          showPagination={showPagination}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPreviousPage={() => this.handlePageChange(currentPage - 1)}
+          handlePageChange={this.handlePageChange}
+        />
+      </div>
     );
   }
 }

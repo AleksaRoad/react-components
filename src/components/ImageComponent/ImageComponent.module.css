@@ -1,0 +1,52 @@
+/* .loaded {
+  height: 80px;
+  border-radius: 5px;
+
+  background: rgb(130 130 130 / 20%);
+  background: -webkit-gradient(
+    linear,
+    left top,
+    right top,
+    color-stop(8%, rgb(130 130 130 / 20%)),
+    color-stop(18%, rgb(130 130 130 / 30%)),
+    color-stop(33%, rgb(130 130 130 / 20%))
+  );
+  background: linear-gradient(
+    to right,
+    rgb(130 130 130 / 20%) 8%,
+    rgb(130 130 130 / 30%) 18%,
+    rgb(130 130 130 / 20%) 33%
+  );
+  background-size: 800px 100px;
+
+  animation: wave-squares 2s infinite ease-out;
+} */
+
+.skeleton {
+  width: 300px;
+  height: 300px;
+  border: 3px solid #ffffff78;
+  background: rgb(130 130 130 / 20%);
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  margin: 50px auto;
+  border: 8px solid transparent;
+  border-top: 8px solid #b474f0;
+  border-bottom: 8px solid #4d0b7c;
+  border-radius: 50%;
+
+  animation: spin 1.5s linear infinite;
+}
