@@ -25,7 +25,7 @@ export class ErrorBoundary extends Component<
     if (this.state.hasError) {
       return (
         <div className={styles.errorBoundary} key="error-boundary">
-          <h1>Something went wrong.</h1>
+          <h1>{ERROR_MESSAGES.OOOPS}</h1>
           <p>{this.state.error?.message}</p>
         </div>
       );
