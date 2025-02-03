@@ -62,14 +62,16 @@ export class App extends Component<unknown, AppState> {
     const showPagination = searchQuery.length > 0 && totalPages > 1;
 
     return (
-      <div className={styles.container} key="app-container">
+      <div className={styles.container}>
         <h1 className={styles.title}>Rick and Morty Characters</h1>
         <Header
           onSearch={this.handleSearch}
           apiErrorMessage={this.state.apiErrorMessage}
         />
         {loading ? (
-          <Spinner />
+          <div className={styles.spinnerContainer}>
+            <Spinner />
+          </div>
         ) : (
           <Main
             characters={characters}
