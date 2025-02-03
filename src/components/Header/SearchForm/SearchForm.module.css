@@ -1,0 +1,41 @@
+.searchContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  gap: 15px;
+}
+
+.input {
+  min-width: 200px;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+.input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 2px rgb(0 123 255 / 25%);
+}
+
+.button {
+  cursor: pointer;
+
+  padding: 8px 15px;
+  border: none;
+  border-radius: 5px;
+
+  color: #fff;
+
+  background-color: #000;
+
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: #007bff;
+}

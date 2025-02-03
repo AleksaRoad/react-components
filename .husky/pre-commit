@@ -1,0 +1,4 @@
+npm run format:fix
+npm run lint
+npm run stylelint:fix
+npm run type-check

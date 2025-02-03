@@ -1,0 +1,14 @@
+import { type ReactNode } from 'react';
+
+export type ErrorBoundaryProps = {
+  children: ReactNode;
+};
+
+export type ErrorBoundaryState = {
+  hasError: boolean;
+  error: Error | null;
+};
+
+export type ButtonState = {
+  isError: boolean;
+};

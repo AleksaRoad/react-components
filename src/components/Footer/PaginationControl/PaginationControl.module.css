@@ -1,0 +1,42 @@
+.container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: center;
+
+  margin-block: 20px;
+}
+
+.button {
+  cursor: pointer;
+
+  width: 80px;
+  padding-block: 5px;
+  border: none;
+  border-radius: 5px;
+
+  background-color: #fff;
+
+  transition:
+    background-color 0.2s ease-in-out,
+    color 0.2s ease-in-out;
+}
+
+.button:hover {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.button:disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.pageInfo {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  place-items: center center;
+  justify-content: center;
+
+  width: 120px;
+}
