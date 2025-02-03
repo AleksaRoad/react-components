@@ -1,5 +1,5 @@
 import styles from './Main.module.css';
-import { CharacterCard } from '@/components/Main/CharacterCard';
+import { CharacterCard } from '@/components/Main';
 import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
 import clsx from 'clsx';
 import type { FC } from 'react';

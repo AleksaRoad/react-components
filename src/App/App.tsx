@@ -4,10 +4,10 @@ import { CACHE_KEY } from '@/shared';
 import type { AppState } from './types';
 import { storageService } from '@/services';
 import { rickAndMortyService } from '@/services';
-import { Header } from '@/components/Header';
-import { Footer } from '@/components/Footer';
-import { Main } from '@/components/Main/';
-import { Spinner } from '@/components/Spinner';
+import { Header } from '@/components';
+import { Footer } from '@/components';
+import { Main } from '@/components';
+import { Spinner } from '@/components';
 
 export class App extends Component<unknown, AppState> {
   state: AppState = {
