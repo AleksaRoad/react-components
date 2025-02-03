@@ -6,8 +6,8 @@ import { storageService } from '@/services';
 import { rickAndMortyService } from '@/services';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { Main } from '@/components/Main/Main';
-import { Spinner } from '../components/Spinner';
+import { Main } from '@/components/Main/';
+import { Spinner } from '@/components/Spinner';
 
 export class App extends Component<unknown, AppState> {
   state: AppState = {
