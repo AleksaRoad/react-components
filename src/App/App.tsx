@@ -63,7 +63,7 @@ export class App extends Component<unknown, AppState> {
 
     return (
       <div className={styles.container}>
-        <h1 className={styles.title}>Rick and Morty Characters</h1>
+        <h1 className="font-bold text-red-500">Rick and Morty Characters</h1>
         <Header
           onSearch={this.handleSearch}
           apiErrorMessage={this.state.apiErrorMessage}
