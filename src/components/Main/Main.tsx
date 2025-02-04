@@ -1,7 +1,5 @@
-import styles from './Main.module.css';
 import { CharacterCard } from '@/components/Main';
 import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
-import clsx from 'clsx';
 import type { FC } from 'react';
 import type { MainProps } from './types';
 
@@ -12,7 +10,7 @@ export const Main: FC<MainProps> = ({
 }) => {
   const isResultsFound = characters.length > 0;
   return isResultsFound ? (
-    <ul className={styles.list}>
+    <ul className="max-xs:grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))] m-0 grid list-none grid-cols-[repeat(auto-fill,_minmax(400px,_1fr))] justify-items-center gap-5 px-0 py-10">
       {characters.map((character: RickAndMortyCharacter) => (
         <li key={character.id}>
           <CharacterCard character={character} />
@@ -21,9 +19,9 @@ export const Main: FC<MainProps> = ({
     </ul>
   ) : (
     !apiErrorMessage && (
-      <p className={clsx(styles.noResults)}>
+      <p className="py-10 text-center text-2xl">
         {ERROR_MESSAGES.NO_RESULTS_FOUND}
-        <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
+        <span className="text-red-md text-4xl">{`'${searchQuery}'`}</span>
       </p>
     )
   );

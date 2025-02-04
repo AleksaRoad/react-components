@@ -1,5 +1,4 @@
 import { Component } from 'react';
-import styles from './App.module.css';
 import { CACHE_KEY } from '@/shared';
 import type { AppState } from './types';
 import { storageService } from '@/services';
@@ -62,14 +61,16 @@ export class App extends Component<unknown, AppState> {
     const showPagination = searchQuery.length > 0 && totalPages > 1;
 
     return (
-      <div className={styles.container}>
-        <h1 className="font-bold text-red-500">Rick and Morty Characters</h1>
+      <div className="mx-auto max-w-xl p-2.5">
+        <h1 className="font-ramFont p-6 text-center text-5xl text-white">
+          Rick and Morty Characters
+        </h1>
         <Header
           onSearch={this.handleSearch}
           apiErrorMessage={this.state.apiErrorMessage}
         />
         {loading ? (
-          <div className={styles.spinnerContainer}>
+          <div className="flex justify-center py-8">
             <Spinner />
           </div>
         ) : (

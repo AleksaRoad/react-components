@@ -1,4 +1,3 @@
-import styles from './PaginationControl.module.css';
 import type { PaginationControlProps } from './types';
 
 export const PaginationControl = ({
@@ -8,20 +7,21 @@ export const PaginationControl = ({
   onNextPage,
 }: PaginationControlProps) => {
   return (
-    <div className={styles.container}>
+    <div className="my-5 flex items-center justify-center gap-2">
       <button
-        className={styles.button}
+        className="hover:bg-blue-md w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out hover:text-white disabled:pointer-events-none disabled:opacity-50"
         onClick={onPreviousPage}
         disabled={currentPage === 1}
       >
         Previous
       </button>
-      <div className={styles.pageInfo}>
-        Page<span className={styles.currentPage}>{currentPage}</span>of
-        <span className={styles.totalPages}>{totalPages}</span>
+      <div className="flex w-32 items-center justify-center text-white">
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
       </div>
       <button
-        className={styles.button}
+        className="hover:bg-blue-md w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out hover:text-white disabled:pointer-events-none disabled:opacity-50"
         onClick={onNextPage}
         disabled={currentPage === totalPages}
       >

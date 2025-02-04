@@ -1,7 +1,6 @@
 import type { FormEvent, RefObject } from 'react';
 import { Component, createRef } from 'react';
 import { CACHE_KEY } from '@/shared';
-import styles from './SearchForm.module.css';
 import type { SearchFormProps } from './types';
 import { storageService } from '@/services';
 
@@ -36,16 +35,19 @@ export class SearchForm extends Component<SearchFormProps> {
 
   render() {
     return (
-      <div className={styles.searchContainer}>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
+      <div className="flex items-center justify-center">
+        <form className="flex gap-3.5" onSubmit={this.handleSubmit}>
           <input
-            className={styles.input}
+            className="focus:border-blue-md focus:ring-blue-lm min-w-52 rounded-lg border-none bg-white/[0.9] px-2 py-1 focus:ring-2 focus:outline-none"
             type="search"
             ref={this.searchInput}
             placeholder="Enter search term"
             onFocus={this.handleFocus}
           />
-          <button className={styles.button} type="submit">
+          <button
+            className="hover:bg-blue-md cursor-pointer rounded-xl border-none bg-black px-4 py-3 text-white transition-colors duration-300 ease-in-out"
+            type="submit"
+          >
             Search
           </button>
         </form>
