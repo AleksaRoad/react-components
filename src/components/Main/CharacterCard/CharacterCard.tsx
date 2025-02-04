@@ -16,6 +16,33 @@ const CharacterCardComponent = ({ character }: CharacterCardProps) => {
         src={character.image}
         alt={character.name}
       />
+      {/*<ul className="m-0 flex w-full list-none flex-col gap-3 p-0">
+        <li className="flex w-full justify-between [&>*:first-child]:text-left [&>*:last-child]:text-right">
+           <span>Species: </span>
+          <span>{character.species}</span>
+        </li>
+        <li className="flex w-full justify-between [&>*:first-child]:text-left [&>*:last-child]:text-right">
+          <span>Gender: </span>
+          <span>{character.gender}</span>
+        </li>
+        <li className="flex w-full justify-between [&>*:first-child]:text-left [&>*:last-child]:text-right">
+          <span>Status: </span>
+          <span>{character.status}</span>
+        </li>
+        <li className="flex w-full justify-between [&>*:first-child]:text-left [&>*:last-child]:text-right">
+          <span>Type: </span>
+          <span>{character.type || 'N/A'}</span>
+        </li>
+        <li className="flex w-full justify-between [&>*:first-child]:text-left [&>*:last-child]:text-right">
+          <span>Origin: </span>
+          <span>{character.origin}</span>
+        </li>
+        <li className="flex w-full justify-between [&>*:first-child]:text-left [&>*:last-child]:text-right">
+          <span>Location: </span>
+          <span>{character.location}</span> 
+        </li>
+      </ul>
+      */}
     </div>
   );
 };

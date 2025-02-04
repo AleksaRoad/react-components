@@ -18,12 +18,7 @@ export const getCharacters = async (
   searchQuery: string = '',
   page: number = 1
 ): Promise<{ characters: RickAndMortyCharacter[]; headers: Headers }> => {
-  let url = `${BASE_URL.api}/${ENDPOINTS.character}`;
-  if (searchQuery.trim()) {
-    url = `${url}?${ENDPOINTS.query}=${searchQuery}&${ENDPOINTS._page}=${page}&${ENDPOINTS._limit}=${PAGE_SIZE}`;
-  } else {
-    url = `${url}`;
-  }
+  const url = `${BASE_URL.api}/${ENDPOINTS.character}?${ENDPOINTS.query}=${searchQuery}&${ENDPOINTS._page}=${page}&${ENDPOINTS._limit}=${PAGE_SIZE}`;
 
   return fetchData<RickAndMortyCharacter[]>(url);
 };

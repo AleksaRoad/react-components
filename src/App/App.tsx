@@ -53,7 +53,7 @@ export const App = () => {
     loadData(loadSearchQuery() ?? '', page);
   };
 
-  const showPagination = !!(loadSearchQuery() && totalPages > 1);
+  const showPagination = characters.length > 0;
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center p-5">
