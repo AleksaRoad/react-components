@@ -1,93 +1,84 @@
-import { Component } from 'react';
+import { useState, useEffect, useCallback } from 'react';
+import type { RickAndMortyCharacter } from '@/shared';
 import { CACHE_KEY } from '@/shared';
-import type { AppState } from './types';
-import { storageService } from '@/services';
+import { useStorage } from '@/services';
 import { rickAndMortyService } from '@/services';
 import { Header } from '@/components';
 import { Footer } from '@/components';
 import { Main } from '@/components';
 import { Spinner } from '@/components';
 
-export class App extends Component<unknown, AppState> {
-  state: AppState = {
-    characters: [],
-    searchQuery: '',
-    currentPage: 1,
-    totalPages: 0,
-    loading: false,
-    apiErrorMessage: '',
-  };
+export const App = () => {
+  const [characters, setCharacters] = useState<RickAndMortyCharacter[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [apiErrorMessage, setApiErrorMessage] = useState('');
 
-  async componentDidMount() {
-    const savedSearchQuery =
-      storageService.loadSearchQuery(CACHE_KEY.searchQuery) || '';
-    await this.loadData(savedSearchQuery, 1);
-  }
+  const { load: loadSearchQuery, save: saveSearchQuery } = useStorage(
+    CACHE_KEY.searchQuery
+  );
 
-  async loadData(searchQuery: string, page: number) {
-    this.setState({ loading: true });
+  const loadData = useCallback(async (query: string, page: number) => {
+    setLoading(true);
 
     try {
       const { charactersWithImages, totalPages } =
-        await rickAndMortyService.fetchCharacters(searchQuery, page);
-      this.setState({
-        characters: charactersWithImages,
-        totalPages,
-        searchQuery,
-        loading: false,
-      });
+        await rickAndMortyService.fetchCharacters(query, page);
+      setCharacters(charactersWithImages);
+      setTotalPages(totalPages);
+      setLoading(false);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : `${error}`;
-      this.setState({ apiErrorMessage: errorMessage, loading: false });
+      setApiErrorMessage(errorMessage);
+      setLoading(false);
     }
-  }
+  }, []);
 
-  handleSearch = (searchQuery: string) => {
-    this.setState({ searchQuery, currentPage: 1, loading: true }, () => {
-      storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
-      this.loadData(searchQuery, 1);
-    });
+  useEffect(() => {
+    const initialSearchQuery = loadSearchQuery() || '';
+    loadData(initialSearchQuery, 1);
+  }, [loadSearchQuery, loadData]);
+
+  const handleSearch = (newSearchQuery: string) => {
+    saveSearchQuery(newSearchQuery);
+    setCurrentPage(1);
+    setLoading(true);
+    loadData(newSearchQuery, 1);
   };
 
-  handlePageChange = (page: number) => {
-    this.setState({ currentPage: page, loading: true }, () => {
-      this.loadData(this.state.searchQuery, page);
-    });
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    setLoading(true);
+    loadData(loadSearchQuery() ?? '', page);
   };
 
-  render() {
-    const { characters, currentPage, totalPages, loading, searchQuery } =
-      this.state;
-    const showPagination = searchQuery.length > 0 && totalPages > 1;
+  const showPagination = !!(loadSearchQuery() && totalPages > 1);
 
-    return (
-      <div className="mx-auto max-w-xl p-2.5">
-        <h1 className="font-ramFont p-6 text-center text-5xl text-white">
-          Rick and Morty Characters
-        </h1>
-        <Header
-          onSearch={this.handleSearch}
-          apiErrorMessage={this.state.apiErrorMessage}
+  return (
+    <div className="mx-auto max-w-xl p-2.5">
+      <h1 className="font-ramFont p-6 text-center text-5xl text-white">
+        Rick and Morty Characters
+      </h1>
+      <Header onSearch={handleSearch} apiErrorMessage={apiErrorMessage} />
+      {loading ? (
+        <div className="flex justify-center py-8">
+          <Spinner />
+        </div>
+      ) : (
+        <Main
+          characters={characters}
+          searchQuery={loadSearchQuery() ?? ''}
+          apiErrorMessage={apiErrorMessage}
         />
-        {loading ? (
-          <div className="flex justify-center py-8">
-            <Spinner />
-          </div>
-        ) : (
-          <Main
-            characters={characters}
-            searchQuery={searchQuery}
-            apiErrorMessage={this.state.apiErrorMessage}
-          />
-        )}
-        <Footer
-          showPagination={showPagination}
-          currentPage={currentPage}
-          totalPages={totalPages}
-          onPreviousPage={() => this.handlePageChange(currentPage - 1)}
-          handlePageChange={this.handlePageChange}
-        />
-      </div>
-    );
-  }
-}
+      )}
+      <Footer
+        showPagination={showPagination}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPreviousPage={() => handlePageChange(currentPage - 1)}
+        handlePageChange={handlePageChange}
+      />
+    </div>
+  );
+};

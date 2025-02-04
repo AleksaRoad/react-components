@@ -1,7 +1,14 @@
 import type { FC } from 'react';
-import type { FooterProps } from './types';
 import { ErrorBoundaryButton } from '@/components/ErrorBoundary';
 import { PaginationControl } from '@/components/Footer';
+
+type FooterProps = {
+  showPagination: boolean;
+  currentPage: number;
+  totalPages: number;
+  onPreviousPage: (num: number) => void;
+  handlePageChange: (num: number) => void;
+};
 
 export const Footer: FC<FooterProps> = ({
   showPagination,

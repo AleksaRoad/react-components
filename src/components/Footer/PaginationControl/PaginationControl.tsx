@@ -1,4 +1,9 @@
-import type { PaginationControlProps } from './types';
+type PaginationControlProps = {
+  currentPage: number;
+  totalPages: number;
+  onPreviousPage: () => void;
+  onNextPage: () => void;
+};
 
 export const PaginationControl = ({
   currentPage,

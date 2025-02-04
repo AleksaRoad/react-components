@@ -1,3 +1,3 @@
 export { rickAndMortyService } from './rickAndMortyService';
-export { storageService } from './storageService';
+export { useStorage } from './useStorage';
 export * from './api';

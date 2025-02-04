@@ -1,7 +1,12 @@
 import { CharacterCard } from '@/components/Main';
 import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
 import type { FC } from 'react';
-import type { MainProps } from './types';
+
+type MainProps = {
+  characters: RickAndMortyCharacter[];
+  searchQuery: string;
+  apiErrorMessage: string;
+};
 
 export const Main: FC<MainProps> = ({
   characters,

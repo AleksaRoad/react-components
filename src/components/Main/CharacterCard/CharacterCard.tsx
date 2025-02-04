@@ -1,5 +1,9 @@
 import { memo } from 'react';
-import type { CharacterCardProps } from './types.ts';
+import type { RickAndMortyCharacter } from '@/shared/types.ts';
+
+type CharacterCardProps = {
+  character: RickAndMortyCharacter;
+};
 
 const CharacterCardComponent = ({ character }: CharacterCardProps) => {
   return (

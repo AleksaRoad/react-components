@@ -1,7 +1,11 @@
 import { SearchForm } from '@/components/Header/SearchForm';
 import type { FC } from 'react';
-import type { HeaderProps } from './types';
 import { ERROR_MESSAGES } from '@/shared';
+
+export type HeaderProps = {
+  apiErrorMessage: string;
+  onSearch: (searchQuery: string) => void;
+};
 
 export const Header: FC<HeaderProps> = ({ onSearch, apiErrorMessage }) => {
   return (
