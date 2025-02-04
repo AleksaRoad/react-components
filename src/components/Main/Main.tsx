@@ -15,7 +15,7 @@ export const Main: FC<MainProps> = ({
 }) => {
   const isResultsFound = characters.length > 0;
   return isResultsFound ? (
-    <ul className="max-xs:grid-cols-[repeat(auto-fill,_minmax(280px,_1fr))] m-0 grid list-none grid-cols-[repeat(auto-fill,_minmax(400px,_1fr))] justify-items-center gap-5 px-0 py-10">
+    <ul className="m-0 flex w-full flex-grow list-none flex-wrap items-center justify-center gap-5 px-0 py-10">
       {characters.map((character: RickAndMortyCharacter) => (
         <li key={character.id}>
           <CharacterCard character={character} />

@@ -56,13 +56,13 @@ export const App = () => {
   const showPagination = !!(loadSearchQuery() && totalPages > 1);
 
   return (
-    <div className="mx-auto max-w-xl p-2.5">
+    <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center p-5">
       <h1 className="font-ramFont p-6 text-center text-5xl text-white">
         Rick and Morty Characters
       </h1>
       <Header onSearch={handleSearch} apiErrorMessage={apiErrorMessage} />
       {loading ? (
-        <div className="flex justify-center py-8">
+        <div className="flex flex-grow items-center justify-center">
           <Spinner />
         </div>
       ) : (
