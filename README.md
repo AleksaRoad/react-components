@@ -47,3 +47,4 @@
 - **ESLint**: A linter for JavaScript/TypeScript code.
 - **Prettier**: A code formatting tool.
 - **Husky**: Git Hooks for automating tasks (e.g., linting before commit).
+- **Tailwind CSS**: A utility-first CSS framework.
