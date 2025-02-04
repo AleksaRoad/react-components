@@ -18,7 +18,7 @@ export const Footer: FC<FooterProps> = ({
   handlePageChange,
 }) => {
   return (
-    <div className="mt-auto flex flex-wrap items-center justify-center gap-5">
+    <footer className="mt-auto flex flex-wrap items-center justify-center gap-5">
       {showPagination && (
         <PaginationControl
           currentPage={currentPage}
@@ -28,6 +28,6 @@ export const Footer: FC<FooterProps> = ({
         />
       )}
       <ErrorBoundaryButton />
-    </div>
+    </footer>
   );
 };
