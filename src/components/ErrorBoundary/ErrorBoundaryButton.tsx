@@ -17,7 +17,7 @@ export function ErrorBoundaryButton() {
 
   return (
     <button
-      className="bg-blue-md cursor-pointer rounded-xl border-none px-4 py-2 text-white transition-colors duration-300 ease-in-out hover:bg-white hover:text-black"
+      className="bg-blue-md active:bg-blue-md focus:outline-blue-xs cursor-pointer rounded-xl border-none px-4 py-2 text-white transition-colors duration-300 ease-in-out sm:hover:bg-white sm:hover:text-black"
       onClick={handleClick}
     >
       Trigger Error

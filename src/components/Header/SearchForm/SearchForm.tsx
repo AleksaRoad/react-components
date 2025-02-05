@@ -34,13 +34,13 @@ export function SearchForm({ onSearch }: SearchFormProps) {
     <div className="flex items-center justify-center">
       <form className="flex gap-3.5" onSubmit={handleSubmit}>
         <input
-          className="focus:border-blue-md focus:ring-blue-lm min-w-52 rounded-lg border-none bg-white/[0.9] px-2 py-1 focus:ring-2 focus:outline-none"
+          className="focus:border-blue-md focus:ring-blue-lm focus:outline-blue-md min-w-52 rounded-lg border-none bg-white/[0.9] px-2 py-1 focus:ring-2"
           type="search"
           ref={searchInput}
           placeholder="Enter search term"
         />
         <button
-          className="hover:bg-blue-md cursor-pointer rounded-xl border-none bg-black px-4 py-3 text-white transition-colors duration-300 ease-in-out"
+          className="sm:hover:bg-blue-md active:bg-blue-md focus:outline-blue-xs cursor-pointer rounded-xl border-none bg-black px-4 py-3 text-white transition-colors duration-300 ease-in-out"
           type="submit"
         >
           Search
