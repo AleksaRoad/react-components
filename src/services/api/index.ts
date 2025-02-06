@@ -1,1 +1,5 @@
-export { getCharacters, fetchCharacters } from './rickAndMortyApi';
+export {
+  getCharacters,
+  fetchCharacters,
+  getCharacter,
+} from './rickAndMortyApi';

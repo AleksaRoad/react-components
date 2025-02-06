@@ -30,6 +30,13 @@ export const getCharacters = async (
   return fetchData<RickAndMortyCharacter[]>(url);
 };
 
+export const getCharacter = async (
+  id: number
+): Promise<{ characters: RickAndMortyCharacter; count: number }> => {
+  const url = `${BASE_URL.api}${ENDPOINTS.character}?id=${id}`;
+  return fetchData<RickAndMortyCharacter>(url);
+};
+
 export const getCharacterImageUrl = (id: number): string => {
   return `${BASE_URL.avatar}${ENDPOINTS.avatar}${id}.jpeg`;
 };
