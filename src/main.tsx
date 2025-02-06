@@ -2,7 +2,7 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from '@/App';
 import './styles.css';
-import { ErrorBoundary } from '@/components';
+import { BrowserRouter, Route, Routes } from 'react-router';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -11,8 +11,16 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-    <ErrorBoundary>
-      <App />
-    </ErrorBoundary>
+     <BrowserRouter>
+      <Routes>
+      <Route path="/" element={<App />} />
+      <Route path='*' element={
+        <main style={{ padding: "1rem" }}>
+          <p>Theres nothing here!</p>
+        </main>
+      }
+      />
+      </Routes>
+     </BrowserRouter>
   </StrictMode>
 );

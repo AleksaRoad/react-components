@@ -9,5 +9,4 @@ export const ERROR_MESSAGES = {
   FAILED_TO_FETCH_DATA: 'Failed to fetch data:',
   OOOPS: 'Ooops! Something went wrong!',
   NO_RESULTS_FOUND: 'No results found for your search for ',
-  ERROR_BOUNDARY_CAUGHT: 'Error caught in ErrorBoundary:',
 };

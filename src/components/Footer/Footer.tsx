@@ -1,5 +1,4 @@
 import type { FC } from 'react';
-import { ErrorBoundaryButton } from '@/components/ErrorBoundary';
 import { PaginationControl } from '@/components/Footer';
 
 type FooterProps = {
@@ -27,7 +26,6 @@ export const Footer: FC<FooterProps> = ({
           onNextPage={() => onNextPage(currentPage + 1)}
         />
       )}
-      <ErrorBoundaryButton />
     </footer>
   );
 };
