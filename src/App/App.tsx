@@ -58,29 +58,29 @@ export const App = () => {
   const showPagination = characters.length > 0;
 
   return (
-        <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center p-5">
-          <h1 className="font-ramFont p-6 text-center text-5xl text-white">
-            Rick and Morty Characters
-          </h1>
-          <Header onSearch={handleSearch} apiErrorMessage={apiErrorMessage} />
-          {loading ? (
-            <div className="flex flex-grow items-center justify-center">
-              <Spinner />
-            </div>
-          ) : (
-            <Main
-              characters={characters}
-              searchQuery={loadSearchQuery() ?? ''}
-              apiErrorMessage={apiErrorMessage}
-            />
-          )}
-          <Footer
-            showPagination={showPagination}
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPreviousPage={() => handlePageChange(currentPage - 1)}
-            onNextPage={() => handlePageChange(currentPage + 1)}
-          />
+    <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center p-5">
+      <h1 className="font-ramFont p-6 text-center text-5xl text-white">
+        Rick and Morty Characters
+      </h1>
+      <Header onSearch={handleSearch} apiErrorMessage={apiErrorMessage} />
+      {loading ? (
+        <div className="flex flex-grow items-center justify-center">
+          <Spinner />
         </div>
+      ) : (
+        <Main
+          characters={characters}
+          searchQuery={loadSearchQuery() ?? ''}
+          apiErrorMessage={apiErrorMessage}
+        />
+      )}
+      <Footer
+        showPagination={showPagination}
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPreviousPage={() => handlePageChange(currentPage - 1)}
+        onNextPage={() => handlePageChange(currentPage + 1)}
+      />
+    </div>
   );
 };
