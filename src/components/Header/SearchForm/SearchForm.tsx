@@ -21,13 +21,9 @@ export function SearchForm({ onSearch }: SearchFormProps) {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const searchQuery = searchInput.current?.value.trim() || '';
-    if (searchQuery) {
-      save(searchQuery);
-      onSearch(searchQuery);
-    } else {
-      onSearch('');
-    }
+    const searchQuery = searchInput.current?.value?.trim() || '';
+    save(searchQuery && searchQuery);
+    onSearch(searchQuery || '');
   };
 
   return (

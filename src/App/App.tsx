@@ -77,7 +77,7 @@ export const App = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         onPreviousPage={() => handlePageChange(currentPage - 1)}
-        handlePageChange={handlePageChange}
+        onNextPage={() => handlePageChange(currentPage + 1)}
       />
     </div>
   );

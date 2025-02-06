@@ -15,14 +15,20 @@ const fetchData = async <T>(
 };
 
 export const getCharacters = async (
-  searchQuery: string = '',
-  page: number = 1
+  searchQuery: '',
+  page: 1
 ): Promise<{ characters: RickAndMortyCharacter[]; headers: Headers }> => {
-  const url = `${BASE_URL.api}/${ENDPOINTS.character}?${ENDPOINTS.query}=${searchQuery}&${ENDPOINTS._page}=${page}&${ENDPOINTS._limit}=${PAGE_SIZE}`;
+  const searchParams = new URLSearchParams([
+    ['q', searchQuery],
+    ['_page', page.toString()],
+    ['_limit', PAGE_SIZE.toString()],
+  ]);
+
+  const url = `${BASE_URL.api}${ENDPOINTS.character}?${searchParams.toString()}`;
 
   return fetchData<RickAndMortyCharacter[]>(url);
 };
 
 export const getCharacterImageUrl = (id: number): string => {
-  return `${BASE_URL.avatar}/${ENDPOINTS.character}/${ENDPOINTS.avatar}/${id}.jpeg`;
+  return `${BASE_URL.avatar}${ENDPOINTS.avatar}${id}.jpeg`;
 };

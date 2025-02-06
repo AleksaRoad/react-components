@@ -3,7 +3,7 @@ import type { RickAndMortyCharacter } from '@/shared/types.ts';
 
 type CharacterCardProps = {
   character: RickAndMortyCharacter;
-  onClick: (character: RickAndMortyCharacter | null) => void;
+  onClick: (character: RickAndMortyCharacter) => void;
 };
 
 const CharacterCardComponent = ({ character, onClick }: CharacterCardProps) => {

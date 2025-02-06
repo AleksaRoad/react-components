@@ -20,8 +20,7 @@ export const Main: FC<MainProps> = ({
     setSelectedCharacter(character);
   };
 
-  const isResultsFound = characters.length > 0;
-  return isResultsFound ? (
+  return characters.length > 0 ? (
     <main className="flex h-full w-full flex-grow items-center justify-center gap-5">
       <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-5 px-0 py-10">
         {characters.map((character: RickAndMortyCharacter) => (

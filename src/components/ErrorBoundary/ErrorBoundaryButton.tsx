@@ -1,17 +1,13 @@
 import { useState } from 'react';
 
-type ButtonState = {
-  isError: boolean;
-};
-
 export function ErrorBoundaryButton() {
-  const [state, setState] = useState<ButtonState>({ isError: false });
+  const [state, setState] = useState(false);
 
   const handleClick = () => {
-    setState({ isError: true });
+    setState(true);
   };
 
-  if (state.isError) {
+  if (state) {
     throw new Error();
   }
 

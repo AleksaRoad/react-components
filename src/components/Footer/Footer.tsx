@@ -7,7 +7,7 @@ type FooterProps = {
   currentPage: number;
   totalPages: number;
   onPreviousPage: (num: number) => void;
-  handlePageChange: (num: number) => void;
+  onNextPage: (num: number) => void;
 };
 
 export const Footer: FC<FooterProps> = ({
@@ -15,7 +15,7 @@ export const Footer: FC<FooterProps> = ({
   currentPage,
   totalPages,
   onPreviousPage,
-  handlePageChange,
+  onNextPage,
 }) => {
   return (
     <footer className="mt-auto flex flex-wrap items-center justify-center gap-5">
@@ -24,7 +24,7 @@ export const Footer: FC<FooterProps> = ({
           currentPage={currentPage}
           totalPages={totalPages}
           onPreviousPage={() => onPreviousPage(currentPage - 1)}
-          onNextPage={() => handlePageChange(currentPage + 1)}
+          onNextPage={() => onNextPage(currentPage + 1)}
         />
       )}
       <ErrorBoundaryButton />
