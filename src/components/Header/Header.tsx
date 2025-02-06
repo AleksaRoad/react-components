@@ -2,7 +2,7 @@ import { SearchForm } from '@/components/Header/SearchForm';
 import type { FC } from 'react';
 import { ERROR_MESSAGES } from '@/shared';
 
-export type HeaderProps = {
+type HeaderProps = {
   apiErrorMessage: string;
   onSearch: (searchQuery: string) => void;
 };

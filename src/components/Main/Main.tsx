@@ -16,7 +16,7 @@ export const Main: FC<MainProps> = ({
   const [selectedCharacter, setSelectedCharacter] =
     useState<RickAndMortyCharacter | null>(null);
 
-  const handleClickCard = (character: RickAndMortyCharacter | null) => {
+  const handleSelectCharacter = (character: RickAndMortyCharacter | null) => {
     setSelectedCharacter(character);
   };
 
@@ -25,7 +25,10 @@ export const Main: FC<MainProps> = ({
       <ul className="m-0 flex list-none flex-wrap items-center justify-center gap-5 px-0 py-10">
         {characters.map((character: RickAndMortyCharacter) => (
           <li key={character.id}>
-            <CharacterCard character={character} onClick={handleClickCard} />
+            <CharacterCard
+              character={character}
+              onClick={handleSelectCharacter}
+            />
           </li>
         ))}
       </ul>
@@ -37,7 +40,7 @@ export const Main: FC<MainProps> = ({
     !apiErrorMessage && (
       <p className="py-10 text-center text-2xl">
         {ERROR_MESSAGES.NO_RESULTS_FOUND}
-        <span className="text-red-md text-4xl">{`'${searchQuery}'`}</span>
+        <span className="text-red-md text-4xl">{`${searchQuery}`}</span>
       </p>
     )
   );

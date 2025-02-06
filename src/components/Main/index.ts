@@ -1,3 +1,3 @@
 export { Main } from './Main';
-export * from './CharacterCard';
-export * from './CharacterInfoSidebar';
+export { CharacterCard } from './CharacterCard';
+export { CharacterInfoSidebar } from './CharacterInfoSidebar';

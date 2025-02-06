@@ -1,2 +1,2 @@
 export { Header } from './Header';
-export * from './SearchForm';
+export { SearchForm } from './SearchForm';

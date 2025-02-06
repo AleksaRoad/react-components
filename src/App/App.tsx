@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import type { RickAndMortyCharacter } from '@/shared';
 import { CACHE_KEY } from '@/shared';
 import { useStorage } from '@/services';
-import { rickAndMortyService } from '@/services';
+import { fetchCharacters } from '@/services/';
 import { Header } from '@/components';
 import { Footer } from '@/components';
 import { Main } from '@/components';
@@ -19,32 +19,34 @@ export const App = () => {
     CACHE_KEY.searchQuery
   );
 
-  const loadData = useCallback(async (query: string, page: number) => {
+  const loadData = useCallback(async (query: string, page = 1) => {
     setLoading(true);
 
     try {
-      const { charactersWithImages, totalPages } =
-        await rickAndMortyService.fetchCharacters(query, page);
+      const { charactersWithImages, totalPages } = await fetchCharacters(
+        query,
+        page
+      );
       setCharacters(charactersWithImages);
       setTotalPages(totalPages);
-      setLoading(false);
     } catch (error) {
       const errorMessage = error instanceof Error ? error.message : `${error}`;
       setApiErrorMessage(errorMessage);
+    } finally {
       setLoading(false);
     }
   }, []);
 
   useEffect(() => {
     const initialSearchQuery = loadSearchQuery() || '';
-    loadData(initialSearchQuery, 1);
+    loadData(initialSearchQuery);
   }, [loadSearchQuery, loadData]);
 
   const handleSearch = (newSearchQuery: string) => {
     saveSearchQuery(newSearchQuery);
     setCurrentPage(1);
     setLoading(true);
-    loadData(newSearchQuery, 1);
+    loadData(newSearchQuery);
   };
 
   const handlePageChange = (page: number) => {

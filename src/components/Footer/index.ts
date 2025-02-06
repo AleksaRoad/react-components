@@ -1,2 +1,2 @@
 export { Footer } from './Footer';
-export * from './PaginationControl';
+export { PaginationControl } from './PaginationControl';
