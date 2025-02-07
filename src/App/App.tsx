@@ -1,3 +1,4 @@
+import type { FC } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import type { RickAndMortyCharacter } from '@/shared';
 import { CACHE_KEY } from '@/shared';
@@ -10,7 +11,7 @@ import { Spinner } from '@/components';
 import { useMainPageParams } from './useMainPageParams';
 import { useSearchParams } from 'react-router';
 
-export const App = () => {
+export const App: FC = () => {
   const [characters, setCharacters] = useState<RickAndMortyCharacter[]>([]);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
@@ -57,7 +58,7 @@ export const App = () => {
     loadData(loadSearchQuery() ?? '', page);
   };
 
-  const showPagination = characters.length > 0;
+  const isPaginationVisible = characters.length > 0;
 
   return (
     <div className="mx-auto flex min-h-screen w-full max-w-xl flex-col items-center justify-center p-5">
@@ -77,7 +78,7 @@ export const App = () => {
         />
       )}
       <Footer
-        showPagination={showPagination}
+        showPagination={isPaginationVisible}
         currentPage={currentPage}
         totalPages={totalPages}
         onPreviousPage={() => handlePageChange(currentPage - 1)}

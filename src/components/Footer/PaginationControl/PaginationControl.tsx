@@ -1,3 +1,5 @@
+import type { FC } from 'react';
+
 type PaginationControlProps = {
   currentPage: number;
   totalPages: number;
@@ -5,7 +7,7 @@ type PaginationControlProps = {
   onNextPage: () => void;
 };
 
-export const PaginationControl = ({
+export const PaginationControl: FC<PaginationControlProps> = ({
   currentPage,
   totalPages,
   onPreviousPage,

@@ -1,7 +1,8 @@
 import { ERROR_MESSAGES } from '@/shared';
+import type { FC } from 'react';
 import { useNavigate } from 'react-router';
 
-export const NotFound = () => {
+export const NotFound: FC = () => {
   const navigate = useNavigate();
 
   const handleGoHome = () => {

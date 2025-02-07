@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { FormEvent } from 'react';
+import type { FC, FormEvent } from 'react';
 import { CACHE_KEY } from '@/shared';
 import { useStorage } from '@/services';
 
@@ -7,7 +7,7 @@ type SearchFormProps = {
   onSearch: (query: string) => void;
 };
 
-export function SearchForm({ onSearch }: SearchFormProps) {
+export const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
   const searchInput = useRef<HTMLInputElement | null>(null);
   const { load, save } = useStorage(CACHE_KEY.searchQuery);
 
@@ -44,4 +44,4 @@ export function SearchForm({ onSearch }: SearchFormProps) {
       </form>
     </div>
   );
-}
+};

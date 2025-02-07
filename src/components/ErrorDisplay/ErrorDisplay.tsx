@@ -1,4 +1,5 @@
 import { ERROR_MESSAGES } from '@/shared';
+import type { FC } from 'react';
 
 export type ErrorDisplayProps = {
   errorMessage: string;
@@ -6,7 +7,7 @@ export type ErrorDisplayProps = {
   searchQuery?: string;
 };
 
-export const ErrorDisplay = ({
+export const ErrorDisplay: FC<ErrorDisplayProps> = ({
   errorMessage,
   apiErrorMessage,
   searchQuery,
