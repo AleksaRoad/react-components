@@ -1,6 +1,7 @@
 import { CharacterCard, CharacterInfoSidebar } from '@/components/Main';
 import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
 import { useState, type FC } from 'react';
+import { ErrorDisplay } from '../ErrorDisplay/ErrorDisplay';
 
 type MainProps = {
   characters: RickAndMortyCharacter[];
@@ -38,10 +39,10 @@ export const Main: FC<MainProps> = ({
     </main>
   ) : (
     !apiErrorMessage && (
-      <p className="py-10 text-center text-2xl">
-        {ERROR_MESSAGES.NO_RESULTS_FOUND}
-        <span className="text-red-md text-4xl">{`${searchQuery}`}</span>
-      </p>
+      <ErrorDisplay
+        errorMessage={ERROR_MESSAGES.NO_RESULTS_FOUND}
+        searchQuery={searchQuery}
+      />
     )
   );
 };

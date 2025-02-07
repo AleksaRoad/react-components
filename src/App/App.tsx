@@ -7,13 +7,16 @@ import { Header } from '@/components';
 import { Footer } from '@/components';
 import { Main } from '@/components';
 import { Spinner } from '@/components';
+import { useMainPageParams } from './useMainPageParams';
+import { useSearchParams } from 'react-router';
 
 export const App = () => {
   const [characters, setCharacters] = useState<RickAndMortyCharacter[]>([]);
-  const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [loading, setLoading] = useState(false);
   const [apiErrorMessage, setApiErrorMessage] = useState('');
+  const [, setSearchParams] = useSearchParams();
+  const { currentPage } = useMainPageParams();
 
   const { load: loadSearchQuery, save: saveSearchQuery } = useStorage(
     CACHE_KEY.searchQuery
@@ -21,7 +24,6 @@ export const App = () => {
 
   const loadData = useCallback(async (query: string, page = 1) => {
     setLoading(true);
-
     try {
       const { charactersWithImages, totalPages } = await fetchCharacters(
         query,
@@ -39,18 +41,18 @@ export const App = () => {
 
   useEffect(() => {
     const initialSearchQuery = loadSearchQuery() || '';
-    loadData(initialSearchQuery);
-  }, [loadSearchQuery, loadData]);
+    loadData(initialSearchQuery, currentPage);
+  }, [loadSearchQuery, loadData, currentPage]);
 
   const handleSearch = (newSearchQuery: string) => {
     saveSearchQuery(newSearchQuery);
-    setCurrentPage(1);
+    setSearchParams({ page: '1' });
     setLoading(true);
     loadData(newSearchQuery);
   };
 
   const handlePageChange = (page: number) => {
-    setCurrentPage(page);
+    setSearchParams({ page: page.toString() });
     setLoading(true);
     loadData(loadSearchQuery() ?? '', page);
   };

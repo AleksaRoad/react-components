@@ -1,4 +1,7 @@
-export { Footer } from './Footer/Footer';
-export { Header } from './Header/Header';
-export { Main } from './Main/Main';
-export { Spinner } from './Spinner/Spinner';
+export { Footer } from './Footer';
+export { Header } from './Header';
+export { Main } from './Main';
+export { Spinner } from './Spinner';
+export { NotFound } from './NotFoundPage';
+export { SearchForm } from './Header';
+export { ErrorDisplay } from './ErrorDisplay';

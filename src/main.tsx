@@ -2,7 +2,8 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from '@/App';
 import './styles.css';
-import { BrowserRouter, Route, Routes } from 'react-router';
+import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
+import { NotFound } from '@/components';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {
@@ -11,16 +12,19 @@ if (!rootElement) {
 
 createRoot(rootElement).render(
   <StrictMode>
-     <BrowserRouter>
+    <BrowserRouter>
       <Routes>
-      <Route path="/" element={<App />} />
-      <Route path='*' element={
-        <main style={{ padding: "1rem" }}>
-          <p>Theres nothing here!</p>
-        </main>
-      }
-      />
+        <Route path="/" element={<App />} />
+        <Route path="*" element={<Navigate to="/404" replace />} />
+        <Route
+          path="/404"
+          element={
+            <div className="flex min-h-screen items-center justify-center">
+              <NotFound />
+            </div>
+          }
+        />
       </Routes>
-     </BrowserRouter>
+    </BrowserRouter>
   </StrictMode>
 );

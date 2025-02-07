@@ -9,4 +9,6 @@ export const ERROR_MESSAGES = {
   FAILED_TO_FETCH_DATA: 'Failed to fetch data:',
   OOOPS: 'Ooops! Something went wrong!',
   NO_RESULTS_FOUND: 'No results found for your search for ',
+  NOT_FOUND: 'The page you are looking for does not exist.',
+  PLEASE_TRY_AGAIN: 'Please try using different keywords.',
 };
