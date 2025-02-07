@@ -8,4 +8,5 @@ export {
   Spinner,
   ErrorDisplay,
   NotFound,
+  CharacterPage,
 } from './components/';

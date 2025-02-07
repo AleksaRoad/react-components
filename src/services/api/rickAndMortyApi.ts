@@ -2,17 +2,13 @@ import { BASE_URL, ENDPOINTS } from './constants';
 import type { RickAndMortyCharacter } from '@/shared';
 import { ERROR_MESSAGES, PAGE_SIZE } from '@/shared';
 
-const fetchData = async <T>(
-  url: string
-): Promise<{ characters: T; count: number }> => {
+const fetchData = async <T>(url: string): Promise<T> => {
   const response = await fetch(url);
   if (!response.ok) {
     throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
   }
 
-  const count = Number(response.headers.get('X-Total-Count'));
-  const characters: T = await response.json();
-  return { characters, count };
+  return response.json();
 };
 
 export const getCharacters = async (
@@ -26,14 +22,21 @@ export const getCharacters = async (
   ]);
 
   const url = `${BASE_URL.api}${ENDPOINTS.character}?${searchParams.toString()}`;
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
+  }
 
-  return fetchData<RickAndMortyCharacter[]>(url);
+  const count = Number(response.headers.get('X-Total-Count')) || 0;
+  const characters: RickAndMortyCharacter[] = await response.json();
+
+  return { characters, count };
 };
 
-export const getCharacter = async (
+export const getCharacterById = async (
   id: number
-): Promise<{ characters: RickAndMortyCharacter; count: number }> => {
-  const url = `${BASE_URL.api}${ENDPOINTS.character}?id=${id}`;
+): Promise<RickAndMortyCharacter> => {
+  const url = `${BASE_URL.api}${ENDPOINTS.character}/${id}`;
   return fetchData<RickAndMortyCharacter>(url);
 };
 

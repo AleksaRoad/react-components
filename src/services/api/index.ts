@@ -1,5 +1,5 @@
 export {
   getCharacters,
   fetchCharacters,
-  getCharacter,
+  getCharacterById,
 } from './rickAndMortyApi';

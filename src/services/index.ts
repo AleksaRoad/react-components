@@ -1,2 +1,2 @@
 export { useStorage } from './useStorage';
-export { getCharacters, fetchCharacters, getCharacter } from './api';
+export { getCharacters, fetchCharacters, getCharacterById } from './api';
