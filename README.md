@@ -38,6 +38,8 @@
 - **`npm run preview`**: Preview the built project.
 - **`npm run prepare`**: Set up Husky for Git Hooks.
 - **`npm run type-check`**: Type-check the project using TypeScript without emitting files.
+- **`npm run test`**: Run tests using Vitest.
+- **`npm run coverage`**: View test coverage results using Vitest.
 
 ## Technologies Used
 
@@ -48,3 +50,4 @@
 - **Prettier**: A code formatting tool.
 - **Husky**: Git Hooks for automating tasks (e.g., linting before commit).
 - **Tailwind CSS**: A utility-first CSS framework.
+- **Vitest**: A test framework for JavaScript and TypeScript.

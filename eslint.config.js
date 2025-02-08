@@ -7,6 +7,9 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import react from 'eslint-plugin-react';
 import tseslint from 'typescript-eslint';
 import reactCompiler from 'eslint-plugin-react-compiler';
+import jsDom from 'eslint-plugin-jest-dom';
+import eslintTestingLibrary from 'eslint-plugin-testing-library';
+import vitest from 'eslint-plugin-vitest';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -31,6 +34,9 @@ export default tseslint.config(
       'react-refresh': reactRefresh,
       'react-compiler': reactCompiler,
       jsxA11y,
+      vitest,
+      jsDom,
+      eslintTestingLibrary,
     },
     rules: {
       '@typescript-eslint/consistent-type-exports': 'error',

@@ -58,7 +58,7 @@ export const fetchCharacters = async (
   return { charactersWithImages, totalPages };
 };
 
-const addImagesToCharacters = (character: RickAndMortyCharacter) => {
+export const addImagesToCharacters = (character: RickAndMortyCharacter) => {
   if (character.image) return character;
   const imageUrl = getCharacterImageUrl(character.id);
   return { ...character, image: imageUrl };
