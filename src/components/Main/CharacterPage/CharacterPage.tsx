@@ -45,7 +45,7 @@ export const CharacterPage: FC = () => {
   return (
     <>
       {isLoading && (
-        <div className="flex min-h-screen min-w-72 items-center justify-center">
+        <div className="flex min-w-72 items-center justify-center">
           <Spinner />
         </div>
       )}
