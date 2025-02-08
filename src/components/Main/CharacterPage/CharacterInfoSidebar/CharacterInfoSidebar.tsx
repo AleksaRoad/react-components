@@ -22,7 +22,7 @@ export const CharacterInfoSidebar: FC<CharacterInfoSidebarProps> = ({
 
   return (
     <article className="bg-blue-xs flex min-h-96 min-w-72 flex-col items-center gap-5 rounded-4xl p-5">
-      <div className="flex w-64 flex-col items-center justify-center gap-3 rounded-3xl text-black">
+      <header className="flex w-64 flex-col items-center justify-center gap-3 rounded-3xl text-black">
         <h1 className="m-0 max-w-full text-center text-3xl font-bold">
           {character.name}
         </h1>
@@ -31,40 +31,44 @@ export const CharacterInfoSidebar: FC<CharacterInfoSidebarProps> = ({
           src={character.image}
           alt={character.name}
         />
-      </div>
-      <ul className="m-0 flex w-full list-none flex-col gap-3 p-0">
-        <li className="flex w-full flex-col items-center justify-center">
-          <span className="text-2xl font-bold">Species:</span>
-          <span className="text-center">{character.species}</span>
-        </li>
-        <li className="flex w-full flex-col items-center justify-center">
-          <span className="text-2xl font-bold">Gender:</span>
-          <span className="text-center">{character.gender}</span>
-        </li>
-        <li className="flex w-full flex-col items-center justify-center">
-          <span className="text-2xl font-bold">Status:</span>
-          <span className="text-center">{character.status}</span>
-        </li>
-        <li className="flex w-full flex-col items-center justify-center">
-          <span className="text-2xl font-bold">Type:</span>
-          <span className="text-center">{character.type || 'N/A'}</span>
-        </li>
-        <li className="flex w-full flex-col items-center justify-center">
-          <span className="text-2xl font-bold">Origin:</span>
-          <span className="text-center">{character.origin}</span>
-        </li>
-        <li className="flex w-full flex-col items-center justify-center">
-          <span className="text-2xl font-bold">Location:</span>
-          <span className="text-center">{character.location}</span>
-        </li>
-      </ul>
-      <button
-        className="active:bg-blue-md sm:hover:bg-blue-md focus:outline-blue-xs w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out active:text-white sm:hover:text-white"
-        type="button"
-        onClick={handleCloseSidebar}
-      >
-        Close
-      </button>
+      </header>
+      <main>
+        <ul className="m-0 flex w-full list-none flex-col gap-3 p-0">
+          <li className="flex w-full flex-col items-center justify-center">
+            <span className="text-2xl font-bold">Species:</span>
+            <span className="text-center">{character.species}</span>
+          </li>
+          <li className="flex w-full flex-col items-center justify-center">
+            <span className="text-2xl font-bold">Gender:</span>
+            <span className="text-center">{character.gender}</span>
+          </li>
+          <li className="flex w-full flex-col items-center justify-center">
+            <span className="text-2xl font-bold">Status:</span>
+            <span className="text-center">{character.status}</span>
+          </li>
+          <li className="flex w-full flex-col items-center justify-center">
+            <span className="text-2xl font-bold">Type:</span>
+            <span className="text-center">{character.type || 'N/A'}</span>
+          </li>
+          <li className="flex w-full flex-col items-center justify-center">
+            <span className="text-2xl font-bold">Origin:</span>
+            <span className="text-center">{character.origin}</span>
+          </li>
+          <li className="flex w-full flex-col items-center justify-center">
+            <span className="text-2xl font-bold">Location:</span>
+            <span className="text-center">{character.location}</span>
+          </li>
+        </ul>
+      </main>
+      <footer>
+        <button
+          className="active:bg-blue-md sm:hover:bg-blue-md focus:outline-blue-xs w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out active:text-white sm:hover:text-white"
+          type="button"
+          onClick={handleCloseSidebar}
+        >
+          Close
+        </button>
+      </footer>
     </article>
   );
 };
