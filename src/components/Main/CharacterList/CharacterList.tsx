@@ -38,7 +38,6 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
       <ul
         className="m-0 flex list-none flex-wrap items-center justify-center gap-5 px-0 py-10"
         onClick={handleUlClick}
-        role="list"
       >
         {characters.map((character) => (
           <li key={character.id}>
