@@ -1,5 +1,5 @@
 import type { FC } from 'react';
-import { PaginationControl } from '@/components/Footer';
+import { PaginationControl } from '@/components';
 
 type FooterProps = {
   showPagination: boolean;

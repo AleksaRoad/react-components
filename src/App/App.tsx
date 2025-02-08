@@ -3,7 +3,7 @@ import { useState, useEffect, useCallback } from 'react';
 import type { RickAndMortyCharacter } from '@/shared';
 import { CACHE_KEY } from '@/shared';
 import { useStorage } from '@/services';
-import { fetchCharacters } from '@/services/';
+import { fetchCharacters } from '@/services';
 import { Header } from '@/components';
 import { Footer } from '@/components';
 import { Main } from '@/components';

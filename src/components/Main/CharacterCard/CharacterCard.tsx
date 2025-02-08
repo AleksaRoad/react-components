@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { memo } from 'react';
-import type { RickAndMortyCharacter } from '@/shared/types.ts';
+import type { RickAndMortyCharacter } from '@/shared';
 
 type CharacterCardProps = {
   character: RickAndMortyCharacter;

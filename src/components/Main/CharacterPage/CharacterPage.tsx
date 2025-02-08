@@ -4,9 +4,9 @@ import type { FC } from 'react';
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation } from 'react-router';
 import { CharacterInfoSidebar } from './CharacterInfoSidebar';
-import { Spinner } from '@/components/Spinner';
+import { Spinner } from '@/components';
 import { ErrorDisplay } from '@/components';
-import { getCharacterImageUrl } from '@/services/api/rickAndMortyApi';
+import { getCharacterImageUrl } from '@/services';
 
 export const CharacterPage: FC = () => {
   const location = useLocation();

@@ -23,7 +23,7 @@ export const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
     event.preventDefault();
     const searchQuery = searchInput.current?.value?.trim() || '';
     save(searchQuery && searchQuery);
-    onSearch(searchQuery || '');
+    onSearch(searchQuery);
   };
 
   return (

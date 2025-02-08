@@ -1,6 +1,6 @@
 export { App } from './App';
-export { useStorage } from './services/useStorage';
-export { getCharacters, fetchCharacters } from './services/api';
+export { useStorage } from './services';
+export { getCharacters, fetchCharacters } from './services';
 export {
   Footer,
   Header,
