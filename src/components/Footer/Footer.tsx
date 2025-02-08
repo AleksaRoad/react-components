@@ -4,7 +4,7 @@ import { PaginationControl } from '@/components';
 type FooterProps = {
   showPagination: boolean;
   currentPage: number;
-  totalPages: number;
+  totalPages?: number;
   onPreviousPage: (num: number) => void;
   onNextPage: (num: number) => void;
 };
@@ -12,7 +12,7 @@ type FooterProps = {
 export const Footer: FC<FooterProps> = ({
   showPagination,
   currentPage,
-  totalPages,
+  totalPages = 1,
   onPreviousPage,
   onNextPage,
 }) => {

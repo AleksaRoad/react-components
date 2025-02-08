@@ -8,7 +8,7 @@ import { Outlet, useSearchParams } from 'react-router';
 type MainProps = {
   characters: RickAndMortyCharacter[];
   searchQuery: string;
-  apiErrorMessage: string;
+  apiErrorMessage: string | null;
 };
 
 export const Main: FC<MainProps> = ({
@@ -27,6 +27,7 @@ export const Main: FC<MainProps> = ({
     });
     setSelectedCharacter(character);
   };
+
   const handleUlClick = (event: MouseEvent<HTMLUListElement>) => {
     if (event.target === event.currentTarget) {
       setSearchParams((prevParams) => {
