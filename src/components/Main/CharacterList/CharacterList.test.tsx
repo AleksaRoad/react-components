@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import { BrowserRouter } from 'react-router';
 import { describe, expect, it } from 'vitest';
 
-import { MOCK_CHARACTERS_DATA } from '@/shared';
+import { MOCK_CHARACTERS_DATA } from '@/__mocks__/';
 
 import { CharacterList } from './CharacterList';
 
