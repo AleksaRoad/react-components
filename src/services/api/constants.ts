@@ -4,6 +4,6 @@ export const BASE_URL = {
 };
 
 export const ENDPOINTS = {
-  character: 'character',
   avatar: 'character/avatar/',
+  character: 'character',
 };

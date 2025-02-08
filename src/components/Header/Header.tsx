@@ -8,7 +8,7 @@ type HeaderProps = {
   onSearch: (searchQuery: string) => void;
 };
 
-export const Header: FC<HeaderProps> = ({ onSearch, apiErrorMessage }) => {
+export const Header: FC<HeaderProps> = ({ apiErrorMessage, onSearch }) => {
   return (
     <header className="my-8 flex flex-col content-center items-center gap-8 md:flex-col">
       <SearchForm onSearch={onSearch} />

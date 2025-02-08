@@ -9,9 +9,9 @@ type PaginationControlProps = {
 
 export const PaginationControl: FC<PaginationControlProps> = ({
   currentPage,
-  totalPages,
-  onPreviousPage,
   onNextPage,
+  onPreviousPage,
+  totalPages,
 }: PaginationControlProps) => {
   return (
     <div className="my-5 flex items-center justify-center gap-2">

@@ -10,6 +10,8 @@ import reactCompiler from 'eslint-plugin-react-compiler';
 import jsDom from 'eslint-plugin-jest-dom';
 import eslintTestingLibrary from 'eslint-plugin-testing-library';
 import vitest from 'eslint-plugin-vitest';
+import perfectionist from 'eslint-plugin-perfectionist';
+import { type } from '@testing-library/user-event/dist/cjs/utility/type.js';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -37,6 +39,7 @@ export default tseslint.config(
       vitest,
       jsDom,
       eslintTestingLibrary,
+      perfectionist,
     },
     rules: {
       '@typescript-eslint/consistent-type-exports': 'error',
@@ -50,6 +53,13 @@ export default tseslint.config(
       ...react.configs.recommended.rules,
       ...react.configs['jsx-runtime'].rules,
       'no-console': ['error', { allow: ['error'] }],
+      'perfectionist/sort-objects': [
+        'error',
+        {
+          type: 'alphabetical',
+        },
+      ],
+      'perfectionist/sort-interfaces': ['error'],
     },
     settings: {
       react: {

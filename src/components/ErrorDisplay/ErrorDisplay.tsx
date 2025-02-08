@@ -8,8 +8,8 @@ export type ErrorDisplayProps = {
 };
 
 export const ErrorDisplay: FC<ErrorDisplayProps> = ({
-  errorMessage,
   apiErrorMessage,
+  errorMessage,
   searchQuery,
 }: ErrorDisplayProps) => {
   return (

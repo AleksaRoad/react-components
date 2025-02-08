@@ -12,9 +12,9 @@ type MainProps = {
 };
 
 export const Main: FC<MainProps> = ({
+  apiErrorMessage,
   characters,
   searchQuery,
-  apiErrorMessage,
 }) => {
   const [, setSelectedCharacter] = useState<RickAndMortyCharacter | null>(null);
   const [searchParams, setSearchParams] = useSearchParams();

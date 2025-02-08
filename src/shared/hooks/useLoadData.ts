@@ -31,7 +31,7 @@ export const useLoadData = <T, FNARGS extends Array<unknown>>(
   }, [apiFn, memoizedArgs]);
 
   const retValue = useMemo(
-    () => ({ data, isLoading, error }),
+    () => ({ data, error, isLoading }),
     [data, error, isLoading]
   );
 

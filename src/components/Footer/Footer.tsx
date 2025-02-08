@@ -10,11 +10,11 @@ type FooterProps = {
 };
 
 export const Footer: FC<FooterProps> = ({
-  showPagination,
   currentPage,
-  totalPages = 1,
-  onPreviousPage,
   onNextPage,
+  onPreviousPage,
+  showPagination,
+  totalPages = 1,
 }) => {
   return (
     <footer className="mt-auto flex flex-wrap items-center justify-center gap-5">

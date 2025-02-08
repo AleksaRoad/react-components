@@ -11,9 +11,9 @@ export const CharacterPage: FC = () => {
   const characterId = searchParams.get('details');
 
   const {
-    isLoading,
-    error,
     data: character,
+    error,
+    isLoading,
   } = useLoadData(getCharacterById, Number(characterId));
 
   return (
