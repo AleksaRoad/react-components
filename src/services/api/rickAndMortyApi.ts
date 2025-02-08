@@ -1,6 +1,7 @@
-import { BASE_URL, ENDPOINTS } from './constants';
 import type { RickAndMortyCharacter } from '@/shared';
 import { ERROR_MESSAGES, PAGE_SIZE } from '@/shared';
+
+import { BASE_URL, ENDPOINTS } from './constants';
 
 const fetchData = async <T>(url: string): Promise<T> => {
   const response = await fetch(url);

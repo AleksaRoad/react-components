@@ -1,9 +1,11 @@
 import type { FC } from 'react';
 import { useLocation } from 'react-router';
-import { CharacterInfoSidebar } from './CharacterInfoSidebar';
-import { Spinner, ErrorDisplay } from '@/components';
-import { useLoadData } from '@/shared';
+
+import { ErrorDisplay, Spinner } from '@/components';
 import { getCharacterById } from '@/services';
+import { useLoadData } from '@/shared';
+
+import { CharacterInfoSidebar } from './CharacterInfoSidebar';
 
 export const CharacterPage: FC = () => {
   const location = useLocation();

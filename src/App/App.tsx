@@ -1,9 +1,11 @@
 import type { FC } from 'react';
-import { CACHE_KEY, useLoadData } from '@/shared';
-import { useStorage, fetchCharacters } from '@/services';
-import { Header, Footer, Main, Spinner } from '@/components';
-import { useMainPageParams } from './useMainPageParams';
 import { useSearchParams } from 'react-router';
+
+import { Footer, Header, Main, Spinner } from '@/components';
+import { fetchCharacters, useStorage } from '@/services';
+import { CACHE_KEY, useLoadData } from '@/shared';
+
+import { useMainPageParams } from './useMainPageParams';
 
 export const App: FC = () => {
   const [, setSearchParams] = useSearchParams();

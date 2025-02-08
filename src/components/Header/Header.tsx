@@ -1,7 +1,8 @@
-import { SearchForm } from '@/components';
 import type { FC } from 'react';
-import { ERROR_MESSAGES } from '@/shared';
+
+import { SearchForm } from '@/components';
 import { ErrorDisplay } from '@/components';
+import { ERROR_MESSAGES } from '@/shared';
 
 type HeaderProps = {
   apiErrorMessage: string | null;

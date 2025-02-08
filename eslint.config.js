@@ -11,7 +11,7 @@ import jsDom from 'eslint-plugin-jest-dom';
 import eslintTestingLibrary from 'eslint-plugin-testing-library';
 import vitest from 'eslint-plugin-vitest';
 import perfectionist from 'eslint-plugin-perfectionist';
-import { type } from '@testing-library/user-event/dist/cjs/utility/type.js';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 export default tseslint.config(
   { ignores: ['dist'] },
@@ -40,6 +40,7 @@ export default tseslint.config(
       jsDom,
       eslintTestingLibrary,
       perfectionist,
+      'simple-import-sort': simpleImportSort,
     },
     rules: {
       '@typescript-eslint/consistent-type-exports': 'error',
@@ -60,6 +61,8 @@ export default tseslint.config(
         },
       ],
       'perfectionist/sort-interfaces': ['error'],
+      'simple-import-sort/imports': 'error',
+      'simple-import-sort/exports': 'error',
     },
     settings: {
       react: {

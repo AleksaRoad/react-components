@@ -1,5 +1,6 @@
-import { ERROR_MESSAGES } from '@/shared';
 import type { FC } from 'react';
+
+import { ERROR_MESSAGES } from '@/shared';
 
 export type ErrorDisplayProps = {
   errorMessage: string;

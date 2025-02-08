@@ -1,5 +1,6 @@
 import type { FC } from 'react';
 import { memo } from 'react';
+
 import type { RickAndMortyCharacter } from '@/shared';
 
 type CharacterCardProps = {

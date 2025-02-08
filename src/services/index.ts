@@ -1,2 +1,2 @@
+export { fetchCharacters, getCharacterById, getCharacterImageUrl } from './api';
 export { useStorage } from '@/shared';
-export { getCharacterById, getCharacterImageUrl, fetchCharacters } from './api';

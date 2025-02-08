@@ -1,7 +1,8 @@
-import { useEffect, useRef } from 'react';
 import type { FC, FormEvent } from 'react';
-import { CACHE_KEY } from '@/shared';
+import { useEffect, useRef } from 'react';
+
 import { useStorage } from '@/services';
+import { CACHE_KEY } from '@/shared';
 
 type SearchFormProps = {
   onSearch: (query: string) => void;

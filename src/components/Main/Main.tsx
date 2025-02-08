@@ -1,9 +1,10 @@
+import type { FC, MouseEvent } from 'react';
+import { useState } from 'react';
+import { Outlet, useSearchParams } from 'react-router';
+
+import { ErrorDisplay } from '@/components';
 import { CharacterCard } from '@/components/Main';
 import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
-import type { MouseEvent, FC } from 'react';
-import { useState } from 'react';
-import { ErrorDisplay } from '@/components';
-import { Outlet, useSearchParams } from 'react-router';
 
 type MainProps = {
   characters: RickAndMortyCharacter[];

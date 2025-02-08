@@ -1,9 +1,11 @@
+import './styles.css';
+
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
-import { App } from '@/App';
-import './styles.css';
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router';
-import { NotFound, CharacterPage } from '@/components';
+
+import { App } from '@/App';
+import { CharacterPage, NotFound } from '@/components';
 
 const rootElement = document.getElementById('root');
 if (!rootElement) {

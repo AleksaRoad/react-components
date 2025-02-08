@@ -1,6 +1,7 @@
-import type { RickAndMortyCharacter } from '@/shared';
 import type { FC } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+
+import type { RickAndMortyCharacter } from '@/shared';
 
 type CharacterInfoSidebarProps = {
   character: RickAndMortyCharacter;
