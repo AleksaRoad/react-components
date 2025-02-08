@@ -1,6 +1,6 @@
 import type { FC } from 'react';
 import { type MouseEvent, useState } from 'react';
-import { Outlet, useSearchParams } from 'react-router';
+import { useSearchParams } from 'react-router';
 
 import type { RickAndMortyCharacter } from '@/shared';
 
@@ -12,7 +12,7 @@ type CharacterListProps = {
 
 export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
   const [, setSelectedCharacter] = useState<RickAndMortyCharacter | null>(null);
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [, setSearchParams] = useSearchParams();
 
   const handleSelectCharacter = (character: RickAndMortyCharacter) => {
     setSearchParams((prevParams) => {
@@ -34,21 +34,18 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
   };
 
   return (
-    <>
-      <ul
-        className="m-0 flex list-none flex-wrap items-center justify-center gap-5 px-0 py-10"
-        onClick={handleUlClick}
-      >
-        {characters.map((character) => (
-          <li key={character.id}>
-            <CharacterCard
-              character={character}
-              onClick={() => handleSelectCharacter(character)}
-            />
-          </li>
-        ))}
-      </ul>
-      {searchParams.get('details') && <Outlet />}
-    </>
+    <ul
+      className="m-0 flex list-none flex-wrap items-center justify-center gap-5 px-0 py-10"
+      onClick={handleUlClick}
+    >
+      {characters.map((character) => (
+        <li key={character.id}>
+          <CharacterCard
+            character={character}
+            onClick={() => handleSelectCharacter(character)}
+          />
+        </li>
+      ))}
+    </ul>
   );
 };
