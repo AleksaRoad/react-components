@@ -65,6 +65,7 @@ export const CharacterInfoSidebar: FC<CharacterInfoSidebarProps> = ({
         <button
           className="active:bg-blue-md sm:hover:bg-blue-md focus:outline-blue-xs w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out active:text-white sm:hover:text-white"
           type="button"
+          aria-label="close"
           onClick={handleCloseSidebar}
         >
           Close
