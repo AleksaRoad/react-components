@@ -1,4 +1,5 @@
-import { fireEvent, render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import { userEvent } from '@testing-library/user-event';
 
 import { MOCK_CHARACTERS_DATA } from '@/__mocks__';
 
@@ -11,10 +12,17 @@ describe('CharacterCard', () => {
     );
 
     expect(screen.getByText(MOCK_CHARACTERS_DATA[0].name)).toBeInTheDocument();
+    const imageElement = screen.getByRole('img', { name: /Rick Sanchez/i });
+    expect(imageElement).toHaveAttribute(
+      'src',
+      'https://rickandmortyapi.com/api/character/avatar/1.jpeg'
+    );
   });
 
-  it('should open a detailed card component when clicked', () => {
+  it('should open a detailed card component when clicked', async () => {
     const onCardClick = vi.fn();
+    const user = userEvent.setup();
+
     render(
       <CharacterCard
         character={MOCK_CHARACTERS_DATA[0]}
@@ -22,7 +30,8 @@ describe('CharacterCard', () => {
       />
     );
 
-    fireEvent.click(screen.getByRole('button'));
+    await user.click(screen.getByRole('button'));
+
     expect(onCardClick).toHaveBeenCalled();
   });
 });
