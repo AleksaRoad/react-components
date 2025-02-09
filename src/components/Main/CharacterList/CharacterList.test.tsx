@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
-import { BrowserRouter } from 'react-router';
-import { describe, expect, it } from 'vitest';
+import { MemoryRouter } from 'react-router';
 
 import { MOCK_CHARACTERS_DATA, MOCK_EMPTY_DATA } from '@/__mocks__';
 
@@ -9,14 +8,14 @@ import { CharacterList } from './CharacterList';
 describe('CharacterList', () => {
   it('should render the correct number of CharacterCard components based on the characters length', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <CharacterList
           characters={MOCK_CHARACTERS_DATA}
           onSelectCharacter={vi.fn()}
           onUIClick={vi.fn()}
           searchQuery={''}
         />
-      </BrowserRouter>
+      </MemoryRouter>
     );
 
     const list = screen.getByRole('list');
@@ -28,14 +27,14 @@ describe('CharacterList', () => {
 
   it('should display a message when no cards are present', () => {
     render(
-      <BrowserRouter>
+      <MemoryRouter>
         <CharacterList
           characters={MOCK_EMPTY_DATA}
           onSelectCharacter={vi.fn()}
           onUIClick={vi.fn()}
           searchQuery={'rick'}
         />
-      </BrowserRouter>
+      </MemoryRouter>
     );
 
     const message = screen.getByText(/No results found for your search for/i);
