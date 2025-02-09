@@ -1,9 +1,19 @@
 import { render, screen, waitFor } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-import { MemoryRouter, Route, Routes } from 'react-router';
+import userEvent from '@testing-library/user-event';
+import {
+  createMemoryRouter,
+  MemoryRouter,
+  Route,
+  RouterProvider,
+  Routes,
+} from 'react-router';
 
 import { MOCK_CHARACTERS_DATA } from '@/__mocks__';
-import { CharacterInfoSidebar, CharacterPage } from '@/components';
+import {
+  CharacterInfoSidebar,
+  CharacterPage,
+  PaginationControl,
+} from '@/components';
 
 import { HomePage } from './HomePage';
 
@@ -15,7 +25,6 @@ describe('HomePage', () => {
 
     it('should trigger additional API call to fetch detailed information when user clicks on the Card', async () => {
       const fetchSpy = vi.spyOn(globalThis, 'fetch');
-
       const user = userEvent.setup();
 
       render(
@@ -80,8 +89,8 @@ describe('HomePage', () => {
 
     it('should hide the component when clicking the close button', async () => {
       const fetchSpy = vi.spyOn(globalThis, 'fetch');
-
       const user = userEvent.setup();
+
       render(
         <MemoryRouter>
           <CharacterInfoSidebar character={MOCK_CHARACTERS_DATA[3]} />
@@ -98,6 +107,50 @@ describe('HomePage', () => {
 
       await waitFor(() => {
         expect(fetchSpy).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('PaginationControl', () => {
+      afterEach(() => {
+        vi.clearAllMocks();
+      });
+
+      it('should display the correct number of pages', async () => {
+        render(
+          <PaginationControl
+            currentPage={1}
+            onNextPage={vi.fn()}
+            onPreviousPage={vi.fn()}
+            totalPages={5}
+          />
+        );
+        const pagination = screen.getByText(/Page 1 of 5/i);
+
+        expect(pagination).toBeInTheDocument();
+      });
+
+      it('should update the URL query parameter when the page changes', async () => {
+        const user = userEvent.setup();
+
+        const router = createMemoryRouter(
+          [
+            {
+              element: <HomePage />,
+              path: '/',
+            },
+          ],
+          { initialEntries: ['/?page=2'] }
+        );
+
+        render(<RouterProvider router={router} />);
+
+        const nextButton = await screen.findByRole('button', { name: /next/i });
+
+        await user.click(nextButton);
+
+        await waitFor(() => {
+          expect(router.state.location.search).toBe('?page=3');
+        });
       });
     });
   });
