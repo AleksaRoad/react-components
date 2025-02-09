@@ -2,15 +2,22 @@ import type { FC } from 'react';
 import { type MouseEvent, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
-import type { RickAndMortyCharacter } from '@/shared';
+import { ErrorDisplay } from '@/components';
+import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
 
 import { CharacterCard } from '../CharacterCard';
 
 type CharacterListProps = {
   characters: RickAndMortyCharacter[];
+  searchQuery: string;
+  apiErrorMessage: string | null;
 };
 
-export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
+export const CharacterList: FC<CharacterListProps> = ({
+  apiErrorMessage,
+  characters,
+  searchQuery,
+}) => {
   const [, setSelectedCharacter] = useState<RickAndMortyCharacter | null>(null);
   const [, setSearchParams] = useSearchParams();
 
@@ -33,7 +40,7 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
     }
   };
 
-  return (
+  return characters.length > 0 ? (
     <ul
       className="m-0 flex list-none flex-wrap items-center justify-center gap-5 px-0 py-10"
       onClick={handleUlClick}
@@ -47,5 +54,12 @@ export const CharacterList: FC<CharacterListProps> = ({ characters }) => {
         </li>
       ))}
     </ul>
+  ) : (
+    !apiErrorMessage && (
+      <ErrorDisplay
+        errorMessage={ERROR_MESSAGES.NO_RESULTS_FOUND}
+        searchQuery={searchQuery}
+      />
+    )
   );
 };

@@ -1,10 +1,9 @@
 import type { FC } from 'react';
 import { Outlet, useSearchParams } from 'react-router';
 
-import { ErrorDisplay } from '@/components';
-import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
+import { type RickAndMortyCharacter } from '@/shared';
 
-import { CharacterList } from './CharacterList/CharacterList';
+import { CharacterList } from './CharacterList';
 
 type MainProps = {
   characters: RickAndMortyCharacter[];
@@ -18,17 +17,14 @@ export const Main: FC<MainProps> = ({
   searchQuery,
 }) => {
   const [searchParams] = useSearchParams();
-  return characters.length > 0 ? (
+  return (
     <main className="flex h-full w-full flex-grow items-center justify-center gap-5">
-      <CharacterList characters={characters} />
+      <CharacterList
+        apiErrorMessage={apiErrorMessage}
+        searchQuery={searchQuery}
+        characters={characters}
+      />
       {searchParams.get('details') && <Outlet />}
     </main>
-  ) : (
-    !apiErrorMessage && (
-      <ErrorDisplay
-        errorMessage={ERROR_MESSAGES.NO_RESULTS_FOUND}
-        searchQuery={searchQuery}
-      />
-    )
   );
 };
