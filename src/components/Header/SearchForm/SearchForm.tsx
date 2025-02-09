@@ -1,55 +1,48 @@
-import type { FormEvent, RefObject } from 'react';
-import { Component, createRef } from 'react';
+import type { FC, FormEvent } from 'react';
+import { useEffect, useRef } from 'react';
+
+import { useStorage } from '@/services';
 import { CACHE_KEY } from '@/shared';
-import styles from './SearchForm.module.css';
-import type { SearchFormProps } from './types';
-import { storageService } from '@/services';
 
-export class SearchForm extends Component<SearchFormProps> {
-  private searchInput: RefObject<HTMLInputElement | null> = createRef();
+type SearchFormProps = {
+  onSearch: (query: string) => void;
+};
 
-  componentDidMount() {
-    const savedSearchQuery = storageService.loadSearchQuery(
-      CACHE_KEY.searchQuery
-    );
-    if (savedSearchQuery && this.searchInput.current) {
-      this.searchInput.current.value = savedSearchQuery;
+export const SearchForm: FC<SearchFormProps> = ({ onSearch }) => {
+  const searchInput = useRef<HTMLInputElement | null>(null);
+  const { load, save } = useStorage(CACHE_KEY.searchQuery);
+
+  useEffect(() => {
+    const cachedValue = load();
+
+    if (cachedValue && searchInput.current) {
+      searchInput.current.value = cachedValue;
     }
-  }
+  }, [load]);
 
-  handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const searchQuery = this.searchInput.current?.value.trim() || '';
-    if (searchQuery) {
-      storageService.saveSearchQuery(CACHE_KEY.searchQuery, searchQuery);
-      this.props.onSearch(searchQuery);
-    } else {
-      this.props.onSearch('');
-    }
+    const searchQuery = searchInput.current?.value?.trim() || '';
+    save(searchQuery && searchQuery);
+    onSearch(searchQuery);
   };
 
-  handleFocus = () => {
-    if (this.searchInput.current) {
-      this.searchInput.current.value = '';
-    }
-  };
-
-  render() {
-    return (
-      <div className={styles.searchContainer}>
-        <form className={styles.form} onSubmit={this.handleSubmit}>
-          <input
-            className={styles.input}
-            type="search"
-            ref={this.searchInput}
-            placeholder="Enter search term"
-            onFocus={this.handleFocus}
-          />
-          <button className={styles.button} type="submit">
-            Search
-          </button>
-        </form>
-      </div>
-    );
-  }
-}
+  return (
+    <div className="flex items-center justify-center">
+      <form className="flex gap-3.5" onSubmit={handleSubmit}>
+        <input
+          className="focus:border-blue-md focus:ring-blue-lm focus:outline-blue-md min-w-52 rounded-lg border-none bg-white/[0.9] px-2 py-1 focus:ring-2"
+          type="search"
+          ref={searchInput}
+          placeholder="Enter search term"
+        />
+        <button
+          className="sm:hover:bg-blue-md active:bg-blue-md focus:outline-blue-xs cursor-pointer rounded-xl border-none bg-black px-4 py-3 text-white transition-colors duration-300 ease-in-out"
+          type="submit"
+        >
+          Search
+        </button>
+      </form>
+    </div>
+  );
+};

@@ -1,4 +1,2 @@
-export { rickAndMortyService } from './rickAndMortyService';
-export { storageService } from './storageService';
-export * from '../ErrorBoundary';
-export * from './api';
+export { fetchCharacters, getCharacterById, getCharacterImageUrl } from './api';
+export { useStorage } from '@/shared';

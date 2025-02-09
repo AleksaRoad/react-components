@@ -1,27 +1,34 @@
-import styles from './PaginationControl.module.css';
-import type { PaginationControlProps } from './types';
+import type { FC } from 'react';
 
-export const PaginationControl = ({
+type PaginationControlProps = {
+  currentPage: number;
+  totalPages: number;
+  onPreviousPage: () => void;
+  onNextPage: () => void;
+};
+
+export const PaginationControl: FC<PaginationControlProps> = ({
   currentPage,
-  totalPages,
-  onPreviousPage,
   onNextPage,
+  onPreviousPage,
+  totalPages,
 }: PaginationControlProps) => {
   return (
-    <div className={styles.container}>
+    <div className="my-5 flex items-center justify-center gap-2">
       <button
-        className={styles.button}
+        className="sm:hover:bg-blue-md focus:outline-blue-xs w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out active:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 sm:hover:text-white"
         onClick={onPreviousPage}
         disabled={currentPage === 1}
       >
         Previous
       </button>
-      <div className={styles.pageInfo}>
-        Page<span className={styles.currentPage}>{currentPage}</span>of
-        <span className={styles.totalPages}>{totalPages}</span>
+      <div className="flex w-32 items-center justify-center text-white">
+        <span>
+          Page {currentPage} of {totalPages}
+        </span>
       </div>
       <button
-        className={styles.button}
+        className="sm:hover:bg-blue-md focus:outline-blue-xs w-20 cursor-pointer rounded-xl border-none bg-white py-1.5 text-black transition-colors duration-200 ease-in-out active:bg-blue-700 disabled:pointer-events-none disabled:opacity-50 sm:hover:text-white"
         onClick={onNextPage}
         disabled={currentPage === totalPages}
       >

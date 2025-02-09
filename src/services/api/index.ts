@@ -1,3 +1,5 @@
-export { rickAndMortyApi } from './rickAndMortyApi';
-export { BASE_URL } from './constants';
-export { ENDPOINTS } from './constants';
+export {
+  fetchCharacters,
+  getCharacterById,
+  getCharacterImageUrl,
+} from './rickAndMortyApi';

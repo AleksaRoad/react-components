@@ -1,0 +1,32 @@
+@import url('/assets/fonts/fonts.css');
+@import 'tailwindcss';
+
+@theme {
+  --animate-spin: spin 1.5s linear infinite;
+
+  --breakpoint-xs: 475px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --container-xl: 1440px;
+
+  --font-ramFont: 'ramFont', sans-serif;
+
+  --color-purple-xs: #b474f0;
+  --color-purple-md: #4d0b7c;
+  --color-blue-md: #007bff;
+  --color-blue-lm: #007bff40;
+  --color-blue-xs: #dff9f9c2;
+  --color-red-xs: #f8d7da;
+  --color-red-md: #de0a5e;
+  --color-red-xl: #721c24;
+
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+}

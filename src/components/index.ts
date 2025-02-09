@@ -1,4 +1,7 @@
-export { Footer } from './Footer/Footer';
-export { Header } from './Header/Header';
-export { Main } from './Main/Main';
-export { Spinner } from './Spinner/Spinner';
+export { ErrorDisplay } from './ErrorDisplay';
+export { Footer, PaginationControl } from './Footer';
+export { Header, SearchForm } from './Header';
+export { HomePage } from './HomePage';
+export { CharacterInfoSidebar, CharacterPage, Main } from './Main';
+export { NotFound } from './NotFound';
+export { Spinner } from './Spinner';

@@ -1,30 +1,48 @@
-import styles from './Main.module.css';
-import { CharacterCard } from '@/components/Main/CharacterCard';
-import { ERROR_MESSAGES, type RickAndMortyCharacter } from '@/shared';
-import clsx from 'clsx';
-import type { FC } from 'react';
-import type { MainProps } from './types';
+import { type FC, type MouseEvent, useState } from 'react';
+import { Outlet, useSearchParams } from 'react-router';
 
-export const Main: FC<MainProps> = ({
-  characters,
-  searchQuery,
-  apiErrorMessage,
-}) => {
-  const isResultsFound = characters.length > 0;
-  return isResultsFound ? (
-    <ul className={styles.list}>
-      {characters.map((character: RickAndMortyCharacter) => (
-        <li key={character.id}>
-          <CharacterCard character={character} />
-        </li>
-      ))}
-    </ul>
-  ) : (
-    !apiErrorMessage && (
-      <p className={clsx(styles.noResults)}>
-        {ERROR_MESSAGES.NO_RESULTS_FOUND}
-        <span className={styles.searchQuery}>{`'${searchQuery}'`}</span>
-      </p>
-    )
+import { type RickAndMortyCharacter } from '@/shared';
+
+import { CharacterList } from './CharacterList';
+
+type MainProps = {
+  characters: RickAndMortyCharacter[];
+  searchQuery: string;
+};
+
+export const Main: FC<MainProps> = ({ characters, searchQuery }) => {
+  const [, setSelectedCharacter] = useState<RickAndMortyCharacter | null>(null);
+  const [, setSearchParams] = useSearchParams();
+
+  const handleSelectCharacter = (character: RickAndMortyCharacter) => {
+    setSearchParams((prevParams) => {
+      const newParams = new URLSearchParams(prevParams);
+      newParams.set('details', character.id.toString());
+      return newParams;
+    });
+    setSelectedCharacter(character);
+  };
+
+  const handleUlClick = (event: MouseEvent<HTMLUListElement>) => {
+    if (event.target === event.currentTarget) {
+      setSearchParams((prevParams) => {
+        const newParams = new URLSearchParams(prevParams);
+        newParams.delete('details');
+        return newParams;
+      });
+    }
+  };
+
+  const [searchParams] = useSearchParams();
+  return (
+    <main className="flex h-full w-full flex-grow items-center justify-center gap-5">
+      <CharacterList
+        characters={characters}
+        onSelectCharacter={handleSelectCharacter}
+        onUIClick={handleUlClick}
+        searchQuery={searchQuery}
+      />
+      {searchParams.get('details') && <Outlet />}
+    </main>
   );
 };

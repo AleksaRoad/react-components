@@ -1,18 +1,24 @@
-import styles from './Header.module.css';
-import { SearchForm } from '@/components/Header/SearchForm';
 import type { FC } from 'react';
-import type { HeaderProps } from './types';
+
+import { SearchForm } from '@/components';
+import { ErrorDisplay } from '@/components';
 import { ERROR_MESSAGES } from '@/shared';
 
-export const Header: FC<HeaderProps> = ({ onSearch, apiErrorMessage }) => {
+type HeaderProps = {
+  apiErrorMessage: string | null;
+  onSearch: (searchQuery: string) => void;
+};
+
+export const Header: FC<HeaderProps> = ({ apiErrorMessage, onSearch }) => {
   return (
-    <div className={styles.header}>
+    <header className="my-8 flex flex-col content-center items-center gap-8 md:flex-col">
       <SearchForm onSearch={onSearch} />
       {apiErrorMessage && (
-        <div className={styles.apiErrorMessage}>
-          {`${ERROR_MESSAGES.OOOPS} ${apiErrorMessage}`}
-        </div>
+        <ErrorDisplay
+          errorMessage={ERROR_MESSAGES.OOOPS}
+          apiErrorMessage={apiErrorMessage}
+        />
       )}
-    </div>
+    </header>
   );
 };

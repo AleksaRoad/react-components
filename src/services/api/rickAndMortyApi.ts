@@ -1,36 +1,70 @@
-import { BASE_URL, ENDPOINTS } from './constants';
 import type { RickAndMortyCharacter } from '@/shared';
 import { ERROR_MESSAGES, PAGE_SIZE } from '@/shared';
 
-class RickAndMortyApi {
-  private async fetchData<T>(
-    url: string
-  ): Promise<{ characters: T; headers: Headers }> {
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
-    }
-    const headers = response.headers;
-    const characters: T = await response.json();
+import { BASE_URL, ENDPOINTS } from './constants';
 
-    return { characters, headers };
+const fetchData = async <T>(url: string): Promise<T> => {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
   }
 
-  async getCharacters(
-    searchQuery: string = '',
-    page: number = 1
-  ): Promise<{ characters: RickAndMortyCharacter[]; headers: Headers }> {
-    let url = `${BASE_URL.api}/${ENDPOINTS.character}`;
-    if (searchQuery && searchQuery.trim() !== '') {
-      url = `${url}?${ENDPOINTS.query}=${searchQuery}&${ENDPOINTS._page}=${page}&${ENDPOINTS._limit}=${PAGE_SIZE}`;
-    }
+  return response.json();
+};
 
-    return this.fetchData<RickAndMortyCharacter[]>(url);
+export const getCharacters = async (
+  searchQuery = '',
+  page = 1
+): Promise<{ characters: RickAndMortyCharacter[]; count: number }> => {
+  const searchParams = new URLSearchParams([
+    ['q', searchQuery],
+    ['_page', page.toString()],
+    ['_limit', PAGE_SIZE.toString()],
+  ]);
+
+  const url = `${BASE_URL.api}${ENDPOINTS.character}?${searchParams.toString()}`;
+  const response = await fetch(url);
+
+  if (!response.ok) {
+    throw new Error(`${ERROR_MESSAGES.HTTP_ERROR}${response.status}`);
   }
 
-  getCharacterImageUrl(id: number): string {
-    return `${BASE_URL.avatar}/${ENDPOINTS.character}/${ENDPOINTS.avatar}/${id}.jpeg`;
-  }
-}
+  const count = Number(response.headers.get('X-Total-Count')) || 0;
+  const characters: RickAndMortyCharacter[] = await response.json();
 
-export const rickAndMortyApi = new RickAndMortyApi();
+  return { characters, count };
+};
+
+export const getCharacterById = async (
+  id: number
+): Promise<RickAndMortyCharacter> => {
+  const url = `${BASE_URL.api}${ENDPOINTS.character}/${id}`;
+  const character = await fetchData<RickAndMortyCharacter>(url);
+
+  return addImagesToCharacters(character);
+};
+
+export const fetchCharacters = async (
+  searchQuery: string,
+  page: number
+): Promise<{
+  characters: RickAndMortyCharacter[];
+  totalPages: number;
+}> => {
+  const { characters, count } = await getCharacters(searchQuery, page);
+  const totalPages = count ? Math.ceil(count / PAGE_SIZE) : 1;
+  const charactersWithImages = characters.map(addImagesToCharacters);
+
+  return { characters: charactersWithImages, totalPages };
+};
+
+export const getCharacterImageUrl = (id: number): string => {
+  return `${BASE_URL.avatar}${ENDPOINTS.avatar}${id}.jpeg`;
+};
+
+export const addImagesToCharacters = (character: RickAndMortyCharacter) => {
+  if (character.image) return character;
+  const imageUrl = getCharacterImageUrl(character.id);
+
+  return { ...character, image: imageUrl };
+};

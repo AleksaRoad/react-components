@@ -1,12 +1,12 @@
 export interface RickAndMortyCharacter {
-  id: number;
-  name: string;
-  status: string;
-  species: string;
-  type: string;
-  gender: string;
   created: string;
-  origin: string;
+  gender: string;
+  id: number;
+  image?: string;
   location: string;
-  image: string;
+  name: string;
+  origin: string;
+  species: string;
+  status: string;
+  type: string;
 }
