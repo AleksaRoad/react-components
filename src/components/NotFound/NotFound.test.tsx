@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router';
 
-import { NotFound } from '@/components';
+import { NotFound } from './NotFound';
 
 describe('Routing Tests', () => {
   it('should renders NotFound at "/404"', () => {
