@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useLocation } from 'react-router';
 
-export const useMainPageParams = () => {
+export const useHomePageParams = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
 
