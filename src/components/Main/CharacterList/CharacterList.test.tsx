@@ -12,7 +12,8 @@ describe('CharacterList', () => {
       <BrowserRouter>
         <CharacterList
           characters={MOCK_CHARACTERS_DATA}
-          apiErrorMessage={null}
+          onSelectCharacter={vi.fn()}
+          onUIClick={vi.fn()}
           searchQuery={''}
         />
       </BrowserRouter>
@@ -30,7 +31,8 @@ describe('CharacterList', () => {
       <BrowserRouter>
         <CharacterList
           characters={MOCK_EMPTY_DATA}
-          apiErrorMessage={null}
+          onSelectCharacter={vi.fn()}
+          onUIClick={vi.fn()}
           searchQuery={'rick'}
         />
       </BrowserRouter>

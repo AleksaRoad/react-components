@@ -43,13 +43,7 @@ export const App: FC = () => {
           <Spinner />
         </div>
       ) : (
-        data && (
-          <Main
-            characters={data.characters}
-            searchQuery={searchQuery}
-            apiErrorMessage={apiErrorMessage}
-          />
-        )
+        data && <Main characters={data.characters} searchQuery={searchQuery} />
       )}
       <Footer
         showPagination={isPaginationVisible}
