@@ -11,6 +11,7 @@ export default defineConfig({
     globals: true,
     setupFiles: ['./tests/setup.js'],
     coverage: {
+      all: true,
       include: ['**/*.tsx'],
       exclude: [
         '**/node_modules/**',
