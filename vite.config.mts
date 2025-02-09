@@ -16,7 +16,7 @@ export default defineConfig({
         '**/node_modules/**',
         '**/*.test.tsx',
         '**/*.spec.tsx',
-        'src/__tests__/setup.ts',
+        'src/tests/setup.ts',
         'src/App/App.tsx',
       ],
     },
