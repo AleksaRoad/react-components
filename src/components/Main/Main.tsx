@@ -12,7 +12,7 @@ type MainProps = {
 
 export const Main: FC<MainProps> = ({ characters, searchQuery }) => {
   const [, setSelectedCharacter] = useState<RickAndMortyCharacter | null>(null);
-  const [, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const handleSelectCharacter = (character: RickAndMortyCharacter) => {
     setSearchParams((prevParams) => {
@@ -33,7 +33,6 @@ export const Main: FC<MainProps> = ({ characters, searchQuery }) => {
     }
   };
 
-  const [searchParams] = useSearchParams();
   return (
     <main className="flex h-full w-full flex-grow items-center justify-center gap-5">
       <CharacterList
